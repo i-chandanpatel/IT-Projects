@@ -1,3 +1,5 @@
+// let: It's block scoped
+// var: It's funtion scoped
 // Data Types
 var a=1;
 var b="a10.5";  //String
