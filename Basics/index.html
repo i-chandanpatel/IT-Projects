@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Basics</title>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    a:hover{
+      background-color: beige;
+    }
+  </style>
+</head>
+
+<body>
+  <header style="justify-items: center;">
+    <h1>All HTML elements</h1>
+  </header>
+
+  <nav style="margin: 50px;">
+    <h2 style="text-align: left; text-indent: 10px;" >Content</h2>
+    <ol type="1">
+      <li>
+        <h3><a href="#Anchor" style="letter-spacing: 2px;">Anchor</a></h3>
+      </li>
+      <li>
+        <h3><a href="#BookMark" style="font-variant: small-caps;">BookMark Manager</a></h3>
+      </li>
+      <li>
+        <h3><a href="#figure" style="letter-spacing: 1px;">Figure</a></h3>
+      </li>
+      <li>
+        <h3><a href="#details" style="letter-spacing: 1px;">Details</a></h3>
+      </li>
+
+      <li>
+        <h3><a href="#kmv" style="font-style: italic;">Keshav Mahavidyalaya Website using iframe</a></h3>
+      </li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ol>
+  </nav>
+
+  <br><br>
+
+  <h3>Paragraph using lorem40</h3>
+  <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusamus eligendi quis vel! Expedita impedit molestiae
+    quas, reiciendis voluptates, natus alias, repudiandae modi eum optio dolorem commodi qui error. Sit aliquid ullam
+    nostrum minus laborum possimus, delectus corporis molestias. Dolorem modi harum laborum fugit aspernatur quidem.
+    Ipsam voluptates distinctio aspernatur praesentium?</p>
+
+  <h3 id="Anchor">Anchor tag</h3>
+  <a href="https://www.google.com" target="_blank" rel="noopener noreferrer nofollow" download="google.html"
+    type="text/html" hreflang="en" referrerpolicy="no-referrer" ping="https://your-tracking-url.com/ping"
+    style="color: rgb(96, 96, 169); text-decoration: underline;" title="Go to Google" accesskey="g" tabindex="1"
+    draggable="true">
+    Visit Google
+  </a>
+
+  <h3 id="BookMark">BookMark Manager</h3>
+  <ul>
+    <li><a href="www.facebook.com">Facebook</a></li>
+    <li><a href="www.instagram.com">Instagram</a></li>
+    <li><a href="www.x.com">Twitter</a></li>
+    <li><a href="www.linkedin.com">LinkedIn</a></li>
+    <li><a href="www.youtube.com">YouTube</a></li>
+  </ul>
+  <!-- rel
+    noopener: Prevents the new page from accessing window.opener 
+    noreferrer: No referrer information is sent
+    nofollow: Tells search engines not to follow this link
+
+    download
+    Suggests downloading the resource instead of navigating. 
+    The value ("google.html") is the suggested filename
+
+    referrerpolicy
+    Controls how much referrer info is sent. Common values:
+    no-referrer, origin, no-referrer-when-downgrade, origin-when-cross-origin
+
+    ping
+    Sends a POST request to the URL when the link is clicked, useful for tracking
+
+    title
+    Tooltip text that appears when you hover over the link
+
+    accesskey:  Defines a keyboard shortcut to activate the link. Use a single character like 'g'
+
+    tabindex:   Sets the tab order. 0 = natural order, positive = custom order, -1 = not focusable via tab
+
+    draggable:  Makes the element draggables
+  -->
+
+
+  <figure id="figure">
+    <figcaption>SunSet Image</figcaption>
+    <img src="https://cdn.pixabay.com/photo/2018/08/04/11/30/draw-3583548_1280.png"
+      alt="Silhouette of a person reading under a tree at sunset" crossorigin="anonymous" ismap loading="lazy"
+      longdesc="https://example.com/image-description.html" referrerpolicy="no-referrer"
+      sizes="(max-width: 600px) 100vw, 800px" srcset="
+    https://cdn.pixabay.com/photo/2018/08/04/11/30/draw-3583548_640.png 640w,
+    https://cdn.pixabay.com/photo/2018/08/04/11/30/draw-3583548_1280.png 1280w" usemap="#examplemap" />
+  </figure>
+
+  <!-- 
+  crossorigin:
+   - Use Case: Enables loading images from other domains with CORS (Cross-Origin Resource Sharing) settings, especially when used with <canvas>.
+   - Values:
+     - anonymous: No credentials sent with the request.
+     - use-credentials: Sends cookies and credentials if permitted.
+   - Example: crossorigin="anonymous"
+
+  ismap:
+   - Use Case: Marks the image as a server-side image map. Clicks on the image send coordinates to the server.
+   - Example: <img src="map.jpg" ismap>
+
+  loading:
+   - Use Case: Controls when an image should be loaded (lazy loading can improve performance).
+   - Values:
+     - lazy: Load only when the image is about to appear in the viewport.
+     - eager: Load the image as soon as possible.
+   - Example: loading="lazy"
+
+  longdesc:
+   - Use Case: Points to a URL with a longer description of the image (helps with accessibility).
+   - Example: longdesc="description.html"
+
+  referrerpolicy:
+   - Use Case: Controls the amount of referrer information sent when fetching the image.
+   - Values:
+     - no-referrer
+     - no-referrer-when-downgrade (default)
+     - origin
+     - origin-when-cross-origin
+     - unsafe-url
+   - Example: referrerpolicy="no-referrer"
+
+  sizes:
+   - Use Case: Specifies image display sizes depending on the layout and viewport.
+   - Example: sizes="(max-width: 600px) 100vw, 50vw"
+
+  srcset:
+   - Use Case: Provides multiple image sources for different screen resolutions or sizes.
+   - Example: srcset="image-480w.jpg 480w, image-800w.jpg 800w"
+
+  usemap:
+   - Use Case: Associates the image with a client-side image map defined by <map> element.
+   - Example: usemap="#mapname"
+-->
+
+
+  <details id="details">
+    <summary>About HTML</summary>
+    <p>HTML work as Skeleton of a website.
+      HTML stands for Hyper Text Markup Language</p>
+
+  </details>
+
+  <form>
+    <fieldset>
+      <legend>Personal Details</legend>
+      <label for="name">Name</label>
+      <input type="text" id="name" name="Name" required>
+      <br><br>
+      <label for="gender">Gender:</label>
+      <label for="Male">Male</label>
+      <input type="radio" name="gender" id="Male" value="Male">
+      <label>Female<input type="radio" name="gender" value="female" /></label>
+
+
+      <br><br>
+      <label for="language">Choose a language:</label>
+      <select name="language" id="language">
+        <optgroup label="Programming Languages">
+          <option value="python">Python</option>
+          <option value="javascript">JavaScript</option>
+          <option value="java">Java</option>
+          <option value="csharp">C#</option>
+          <option value="cpp">C++</option>
+        </optgroup>
+
+        <optgroup label="Markup & Stylesheet Languages">
+          <option value="html">HTML</option>
+          <option value="css">CSS</option>
+          <option value="xml">XML</option>
+        </optgroup>
+      </select>
+      <br><br>
+      <label for="feedback">Give Feedback</label>
+      <br>
+      <textarea name="Feedback" id="feedback" rows="4" cols="50"></textarea>
+      <br>
+      <button type="submit">Submit</button>
+    </fieldset>
+  </form>
+
+  <br><br>
+  <iframe id="kmv" src="https://keshav.du.ac.in/" frameborder="2px" width="500px" height="350px" loading="lazy"
+    allowpaymentrequest frameborder="2"></iframe>></iframe>
+
+</body>
+
+</html>
