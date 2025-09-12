@@ -5,11 +5,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Basics</title>
+  <link rel="shortcut icon"
+    href="https://img.freepik.com/premium-vector/mdn-logo-mdn-letter-mdn-letter-logo-design-initials-mdn-logo-linked-with-circle-uppercase-monogram-logo-mdn-typography-technology-business-real-estate-brand_229120-133079.jpg"
+    type="image/x-icon">
   <style>
     html {
       scroll-behavior: smooth;
     }
-    a:hover{
+
+    a:hover {
       background-color: beige;
     }
   </style>
@@ -21,7 +25,7 @@
   </header>
 
   <nav style="margin: 50px;">
-    <h2 style="text-align: left; text-indent: 10px;" >Content</h2>
+    <h2 style="text-align: left; text-indent: 10px;">Content</h2>
     <ol type="1">
       <li>
         <h3><a href="#Anchor" style="letter-spacing: 2px;">Anchor</a></h3>
@@ -33,22 +37,28 @@
         <h3><a href="#figure" style="letter-spacing: 1px;">Figure</a></h3>
       </li>
       <li>
-        <h3><a href="#details" style="letter-spacing: 1px;">Details</a></h3>
+        <h3><a href="#details" style="letter-spacing: 1px;">Personal Details</a></h3> <!--Using form-->
       </li>
 
       <li>
         <h3><a href="#kmv" style="font-style: italic;">Keshav Mahavidyalaya Website using iframe</a></h3>
       </li>
-      <li></li>
-      <li></li>
-      <li></li>
+      <li>
+        <h3><a href="#Table">Table</a></h3>
+      </li>
+      <li>
+        <h3><a href="#Video">Video</a></h3>
+      </li>
+      <li>
+        <h3><a href="#Audio">Audio</a></h3>
+      </li>
       <li></li>
       <li></li>
     </ol>
   </nav>
 
   <br><br>
-
+<main>
   <h3>Paragraph using lorem40</h3>
   <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusamus eligendi quis vel! Expedita impedit molestiae
     quas, reiciendis voluptates, natus alias, repudiandae modi eum optio dolorem commodi qui error. Sit aliquid ullam
@@ -166,7 +176,7 @@
     <fieldset>
       <legend>Personal Details</legend>
       <label for="name">Name</label>
-      <input type="text" id="name" name="Name" required>
+      <input id="name" name="Name" type="text" required>  <!--for="name" in label is for id="name" and name="Name" is for DataBase-->
       <br><br>
       <label for="gender">Gender:</label>
       <label for="Male">Male</label>
@@ -203,7 +213,55 @@
   <br><br>
   <iframe id="kmv" src="https://keshav.du.ac.in/" frameborder="2px" width="500px" height="350px" loading="lazy"
     allowpaymentrequest frameborder="2"></iframe>></iframe>
+  <br><br>
 
+
+
+
+  <table id="Table">
+    <colgroup>
+      <col span="1" style="background-color: red;">
+      <col span="2" style="color: beige; ">
+    </colgroup>
+    <thead>
+      <tr>
+      <tr>Name</tr>
+      <tr>Phone</tr>
+      <tr>State</tr>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Sonu</td>
+        <td>546546546</td>
+        <td>J&K</td>
+      </tr>
+      <tr>
+        <td>Raj</td>
+        <td>456456</td>
+        <td>Hr</td>
+      </tr>
+      <tr>
+        <td>Ram</td>
+        <td>4545</td>
+        <td>NDjsa</td>
+      </tr>
+      <tr>
+        <td>Yash</td>
+        <td>4545</td>
+        <td>dnfal</td>
+      </tr>
+    </tbody>
+  </table>
+<br><br>
+<video src="video.mp4" controls autoplay muted preload="metadata" id="Video" poster="https://accessally.com/wp-content/uploads/2022/09/Canva-tutorial.png"> </video>
+<audio src="udio.mp3"controls preload="auto" id="Audio"> </audio>
+
+<p> &lt;p&gt; is used for Paragraph. &amp;nbsp; is used for space</p>
+</main>
+<footer>
+  <p>&copy;All rights reseved</p>
+</footer>
 </body>
 
 </html>
