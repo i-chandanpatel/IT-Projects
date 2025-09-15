@@ -11,7 +11,7 @@
             height: 200px;
             width: 200px;
             border: 2px solid red;
-            border-radius: 0%;
+            border-radius: 10px;
             /*margin: 10px;*/
             /* Adds space around the box on all side */
             /* If margin colide of two elements than the max margin will be applied */
@@ -21,6 +21,11 @@
             /*Distance between content and border*/
             box-sizing: border-box;
             /*Means the height and width specified is the total by adding border + padding + content*/
+
+            /*display: inline; */
+            /*Padding/Margin will be applied on all side except top bcoz inline elements don't respect top padding/margin.
+            Also heigth and width can't be applied
+            to solve this problem use   "display: inline-block;"   */
 
         }
 
