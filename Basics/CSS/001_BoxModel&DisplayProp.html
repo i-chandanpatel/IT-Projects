@@ -2,71 +2,104 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Box Model</title>
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Box Model & Display Property</title>
     <style>
+        /* Box with border, padding, margin, and box-sizing */
         .box {
-            height: 200px;
-            width: 200px;
-            border: 2px solid red;
-            border-radius: 10px;
-            /*margin: 10px;*/
-            /* Adds space around the box on all side */
-            /* If margin colide of two elements than the max margin will be applied */
-            margin: 10px 20px;
-            /*Top-Bottom, Left-Right*/
-            padding: 5px;
-            /*Distance between content and border*/
-            box-sizing: border-box;
-            /*Means the height and width specified is the total by adding border + padding + content*/
-            /*box-sizing: content-box; */
-            /*The width and height you set is only for the content. */
-            /*display: inline; */
-            /*Padding/Margin will be applied on all side except top bcoz inline elements don't respect top padding/margin.
-            Also heigth and width can't be applied
-            to solve this problem use   "display: inline-block;"   */
+            height: 200px;                /* Height of box */
+            width: 200px;                 /* Width of box */
+            border: 2px solid red;        /* Border thickness and color */
+            border-radius: 10px;          /* Rounded corners */
+            
+            /* Margin sets space outside the box */
+            margin: 10px 20px;            /* 10px top/bottom, 20px left/right */
+            /* Note: If two vertical margins collide, the larger one applies (margin collapsing) */
 
+            padding: 5px;                 /* Space inside border around content */
+
+            box-sizing: border-box;       /* Includes border + padding inside height/width */
+            /* If box-sizing: content-box (default), height/width apply only to content */
+
+            /* Uncomment below to see difference */
+            /* box-sizing: content-box; */
+
+            /* Overflow controls how content outside the box is handled */
+            /* Try: overflow: visible (default), hidden, scroll, auto */
+            /* Overflow hidden hides excess content, scroll adds scrollbar */
         }
 
-        div>p {
+        /* Example showing different display values */
+        .inline-box {
+            display: inline;              /* Inline elements don't respect width/height */
+            border: 2px solid blue;
+            padding: 5px;
+            margin: 5px;
+            background-color: lightblue;
+        }
+
+        .inline-block-box {
+            display: inline-block;        /* Inline-block respects width/height, margin, padding */
+            border: 2px solid green;
+            padding: 5px;
+            margin: 5px;
+            background-color: lightgreen;
+            width: 150px;
+            height: 50px;
+        }
+
+        .block-box {
+            display: block;               /* Block elements take full width by default */
+            border: 2px solid purple;
+            padding: 5px;
+            margin: 5px 0;
+            background-color: lavender;
+            width: 150px;
+            height: 50px;
+        }
+
+        /* Styling paragraphs inside div for better text visibility */
+        div > p {
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
             font-weight: 500;
-            background-color: aqua !important;        /*Override inline CSS*/
+            background-color: aqua !important; /* Override inline styles */
             line-height: 1.2;
-            letter-spacing: 1;
+            letter-spacing: 1px;
             text-transform: capitalize;
             text-decoration-line: overline;
             text-decoration-style: dotted;
             text-decoration-color: hsl(149, 93%, 40%);
             text-decoration-thickness: 2px;
-
         }
     </style>
 </head>
 
 <body>
-    <div class="box">A</div>
-    <div class="box" style="overflow: hidden;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo consequatur inventore fugit quaerat
-        sit tenetur, quasi doloremque veniam enim! Sint, dignissimos deleniti! Quaerat, non sequi? Culpa nesciunt
-        tempore molestias mollitia facilis. Nihil eveniet rem iure ducimus dicta exercitationem unde quasi commodi
-        repellat error, facere dignissimos aut, excepturi soluta. Accusantium provident labore culpa tenetur ex sapiente
-        fugiat doloremque accusamus molestiae nam aperiam exercitationem tempore voluptate pariatur dolore, velit enim
-        repudiandae illo quisquam atque, iure asperiores veritatis. Magnam eos ut deserunt, sed quia reiciendis cum
-        error cumque fuga a temporibus voluptas rem iste veniam similique accusamus molestias numquam recusandae et
-        tempora id.</div>
-    <div class="box" style="overflow:scroll;">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus,
-            molestias nesciunt laborum numquam modi neque nobis minima ex ab itaque. Fugit architecto ipsa facilis ut
-            similique quisquam laudantium deserunt hic blanditiis, totam, ducimus deleniti nihil minus excepturi quaerat
-            consequuntur, perspiciatis tempore eligendi ea nobis. Dolore eligendi, veritatis obcaecati assumenda eveniet
-            ratione iure corporis amet, impedit pariatur fugit porro error? Mollitia velit unde porro repellendus
-            accusantium voluptas sequi aliquam eligendi ad nam enim deleniti vel nihil, dignissimos fuga, adipisci
-            magnam
-            odit facere id accusamus natus repellat. Debitis consequatur ab adipisci doloremque. Quidem molestias
-            consequuntur libero suscipit soluta officia. Odit, sequi quia.</p>
+    <h2>Box Model Example</h2>
+    <div class="box">This is a box with padding, border, and margin.</div>
+
+    <h2>Overflow Hidden Example</h2>
+    <div class="box" style="overflow: hidden;">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. This content might overflow but will be hidden.
     </div>
+
+    <h2>Overflow Scroll Example</h2>
+    <div class="box" style="overflow: scroll;">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. This content will create scrollbars if overflowing.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet.
+    </div>
+
+    <h2>Display Property Examples</h2>
+    <span class="inline-box">Inline Box (blue)</span>
+    <span class="inline-box">Another Inline Box</span>
+
+    <div class="inline-block-box">Inline-block Box (green)</div>
+    <div class="inline-block-box">Another Inline-block Box</div>
+
+    <div class="block-box">Block Box (purple)</div>
+    <div class="block-box">Another Block Box</div>
+
 </body>
 
 </html>
