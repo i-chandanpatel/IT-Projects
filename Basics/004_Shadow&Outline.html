@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            border: 2px solid rgb(224, 29, 29); /* Red solid border, 2px thick */
+            padding: 10px;                       /* Space between border and content */
+            box-shadow:
+                /*inset*/
+                3px 5px 3px brown; /* x-offset: 3px, y-offset: 5px, blur-radius: 3px, shadow color: brown */
+            /* outset: shadow outside the box; inset: shadow inside the box */
+            text-shadow: -4px 4px 2px black; /* Text shadow shifted left 4px, down 4px, blur 2px, color black */
+        }
+        .box1{
+            border: 2px solid black;          /* Black solid border, 2px thick */
+            outline: 2px solid green;          /* Green outline around element, not part of box model */
+            outline-offset: 3px;               /* Distance between border and outline (3px away) */
+            border-radius: 5px;                /* Rounded corners with 5px radius for border and outline */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">I am a box</div>
+    <div class="box1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo quos quidem qui sapiente, aut corrupti rerum
+        nam veritatis debitis. Corporis a laboriosam, vel praesentium aspernatur fuga labore autem eveniet adipisci!
+    </div>
+
+</body>
+
+</html>
