@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Document</title>
+    <style>
+        h2 {
+            background-color: rgba(255, 165, 0, 10%);
+            /* Applying background color with 10% opacity */
+
+            /* position: relative shifts the element visually from its original spot,
+               but it still *reserves its original space* in the layout.
+               So, other elements do NOT occupy its original position.
+               
+               -> Other elements cannot come into its original space */
+            position: relative;
+            top: 80px;
+        }
+
+        h3 {
+            background-color: pink;
+
+            /* position: fixed positions element relative to the viewport.
+               It is removed from the document flow, meaning it does NOT reserve space.
+               
+               -> Other elements *can* occupy the space that fixed element would have taken */
+            position: fixed;
+            top: 10px;
+        }
+
+        h4 {
+            /* position: sticky behaves like relative until scrolling hits a threshold,
+               then becomes fixed. 
+               
+               While behaving as relative, it reserves space and others cannot occupy.
+               Once stuck (fixed), it is removed from flow, so others can occupy the space.
+               
+               -> Before sticking: other elements cannot occupy its space
+               -> After sticking: other elements *can* occupy its space */
+            position: sticky;
+            top: 10px;
+            z-index: 10;
+        }
+
+        h5 {
+            background-color: orange;
+            height: 1000px;
+            /* Tall block just to enable scrolling and observe fixed/sticky effects */
+        }
+
+        h6 {
+            /* position: absolute removes the element from document flow,
+               positioning it relative to nearest positioned ancestor.
+               It does NOT reserve space in the layout.
+               
+               -> Other elements *can* occupy the space where this absolute element would be */
+            position: absolute;
+            top: 100px;
+        }
+
+        div > h6 {
+            /* Same as above but this <h6> is inside a fixed <div>.
+               It is positioned absolutely relative to the <div> container.
+               
+               -> Other elements can occupy its original space */
+            position: absolute;
+            top: 100px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hello coder army</h1>
+
+    <h2>Strinke is coming soon</h2>
+    <!-- h2 is moved visually 80px down but keeps its original space reserved -->
+    <!-- Other elements CANNOT come into this h2’s original space -->
+
+    <h3>I'm Navigation Bar</h3>
+    <!-- h3 stays fixed to top of viewport -->
+    <!-- Other elements CAN come into the space where this h3 would normally be -->
+
+    <h4>I'm Iron Man</h4>
+    <!-- h4 behaves sticky -->
+    <!-- Before sticking, it reserves space and others cannot occupy -->
+    <!-- After sticking to top, it no longer reserves space, so others CAN come into its original spot -->
+
+    <h5>Hello</h5>
+    <!-- Tall container to enable scrolling -->
+
+    <h6>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellat, excepturi!</h6>
+    <!-- Absolutely positioned h6 removed from document flow -->
+    <!-- Other elements CAN occupy this h6’s space -->
+
+    <div style="position: fixed; background-color: brown;">
+        <h6>Lorsm ipsum dolor, sit amet consectetur adipisicing elit. Repellat, excepturi!</h6>
+        <!-- This h6 is positioned absolutely inside a fixed container -->
+        <!-- Other elements CAN occupy this h6’s space -->
+    </div>
+</body>
+</html>
