@@ -1,0 +1,23 @@
+Priority
+     inline > id > class > element > universal
+
+
+Internal style block vs External CSS:
+
+  When both internal and external styles target the same element and property, 
+  the **internal style block overrides external CSS** because the browser reads and applies styles in the order they appear in the HTML document.
+
+  The external stylesheet is linked in the <head> and loads first, then the internal <style> block is processed.  
+  Since CSS cascades, the later declaration (internal styles) will **override** earlier conflicting rules from the external stylesheet.
+
+  However, if the internal style block appears *before* the external stylesheet (for example, if the <link> is placed after the <style> block), then the external CSS will override internal styles because it is read last.
+
+  This behavior is part of the **cascade principle** in CSS, where when two declarations have equal specificity, the one that comes *later* in the source order wins.
+
+  To summarize:
+  - Internal CSS written **after** external CSS overrides it.
+  - Internal CSS written **before** external CSS can be overridden by external CSS.
+
+  This is why the order of stylesheets and style blocks in your HTML matters a lot.
+
+  Additionally, this override behavior is true only if both rules have the same specificity and importance (no `!important` is used).
