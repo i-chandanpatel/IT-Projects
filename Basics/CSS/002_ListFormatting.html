@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lists</title>
+    <style>
+        #1 {
+            /* list-style-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/250px-Image_created_with_a_mobile_phone.png'); */
+            
+            /* Alternative list style to use a disk marker and position it inside the <li> */
+            /* list-style: disk inside; */
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 
+      Unordered list (<ul>) with two inline styles applied:
+      1. list-style: lower-latin; 
+         - Uses lowercase Latin letters (a, b, c...) as list markers instead of default bullets.
+      2. list-style-position: inside;
+         - Positions the marker inside the list item box (rather than outside).
+    -->
+    <ul style="list-style: lower-latin; list-style-position: inside;">
+        <!-- 
+          List item with list-style set to none, so no marker will be shown for this item.
+        -->
+        <li style="list-style: none;">Hello</li>
+
+        <!-- 
+          List item with id="1", which could be styled via CSS selector #1 
+          (e.g., to add custom bullets or different styles).
+        -->
+        <li id="1">Coding</li>
+
+        <!-- 
+          Regular list item, will inherit the list style from the <ul> (lower-latin markers).
+        -->
+        <li>World</li>
+    </ul>
+</body>
+
+</html>
