@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flex Box</title>
+    <style>
+        .container {
+            height: 300px;
+            margin: 5px;
+            background-color: aqua;
+            display: flex; /* Enables flex container behavior for children */
+
+            flex-direction: row; /* Default value: row. Arranges items in horizontal (main axis).
+                                    Other options:
+                                    - column: vertical direction (top to bottom)
+                                    - row-reverse: right to left
+                                    - column-reverse: bottom to top */
+
+            /* Main axis is horizontal (x-axis) when flex-direction is row/row-reverse */
+
+            justify-content: center; /* Aligns items along the main axis (horizontal):
+                                        - flex-start: items align to the left
+                                        - flex-end: items align to the right
+                                        - center: items center horizontally
+                                        - space-between: equal space between items
+                                        - space-around: equal space around items
+                                        - space-evenly: equal space between & around */
+
+            align-items: center; /* Aligns items along the cross axis (vertical here):
+                                   - stretch (default): stretch to fill container
+                                   - flex-start: align to top
+                                   - flex-end: align to bottom
+                                   - center: vertically centered
+                                   - baseline: aligns based on text baseline */
+
+            flex-wrap: wrap; /* Allows items to wrap onto the next line if needed.
+                                Options:
+                                - nowrap (default): all in one line
+                                - wrap: wrap to next line
+                                - wrap-reverse: wrap in reverse order */
+        }
+
+        .container2 {
+            height: 600px;
+            background-color: aqua;
+            display: flex;
+            flex-direction: column; /* Arranges items in vertical (main axis) direction*/
+
+            /* Main axis is now vertical (y-axis) when using column */
+
+            justify-content: center; /* Aligns items along the main (vertical) axis */
+            align-items: end; /* Aligns items on cross (horizontal) axis to the right(At the end). */
+        }
+
+        .box {
+            height: 100px;
+            width: 100px;
+            margin: 5px; /* Adds spacing around each box */
+        }
+
+        .first {
+            background-color: orange;
+            flex-grow: 1; /* Allows the item to grow relative to other flex items.
+                            Value > 0 enables growth. Here, it grows "1 unit" compared to others.
+                            Default: 0 (no growth) */
+        }
+
+        .second {
+            background-color: green;
+            align-self: flex-start;
+        }
+
+        .third {
+            background-color: red;
+            flex-grow: 2; /* Grows twice as much as items with flex-grow: 1 */
+        }
+
+        .fourth {
+            background-color: steelblue;
+            flex-shrink: 3; /* Controls how the item shrinks when there isn’t enough space.
+                               Higher values shrink more. Default: 1 */
+
+            flex-basis: 150px; /* Sets the initial main size before grow/shrink apply.
+                                  Overrides width (in row) or height (in column). */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box first ">First</div>
+        <div class="box second ">Second</div>
+        <div class="box third ">Third</div>
+        <div class="box fourth">Fourth</div>
+    </div>
+
+    <div class="container2">
+        <div class="box first ">First</div>
+        <div class="box second ">Second</div>
+        <div class="box third ">Third</div>
+        <div class="box fourth">Fourth</div>
+    </div>
+
+    <a href="https://flexboxfroggy.com/">Practice FlexBox</a>
+</body>
+</html>
