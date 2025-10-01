@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0px;
+            margin: 0px;
+            box-sizing: border-box;
+        }
+
+        body{
+            background-color: black;
+            color: white;
+            font-size: 30px;
+        }
+        .container{
+            display: grid;
+            height: 800px;
+            width: 800px;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: 1fr 2fr 2fr 1fr;
+            background-color: aqua;
+            border-radius: 6px;
+        }
+        .box{
+            gap: 5px;
+            background-color: rgb(48, 191, 136);
+            margin: 5px;
+            padding: 3px;
+            border-radius: 8px;
+        }
+        .Header{
+            grid-column-start: 1;
+            grid-column-end: 4;
+        }
+        .SideBar{
+            grid-row-start: 2;
+            grid-row-end: 4;
+        }
+        .Content1{
+            grid-column:2/4;
+        }
+        .Footer{
+            grid-column: 1/4;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://www.uxversestudio.com/blog/why-ui-designers-should-understand-flexbox-and-css-grid">Layout to create</a>
+    <div class="container">
+        <div class="box Header">Header</div>
+        <div class="box SideBar">SideBar</div>
+        <div class="box Content1">Content1</div>
+        <div class="box Content2">Content2</div>
+        <div class="box Content3">Content3</div>
+        <div class="box Footer">Footer</div>
+
+    </div>
+    
+</body>
+</html>
