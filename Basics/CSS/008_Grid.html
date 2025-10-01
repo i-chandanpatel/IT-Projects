@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0px;
+            margin: 0px;
+            color: white;
+            font-size: 30px;
+            box-sizing: border-box; /* Ensures padding/borders don't affect element size */
+        }
+
+        .container {
+            display: grid; /* Activates CSS Grid layout */
+            
+            /* Define 2 rows of equal height */
+            grid-template-rows: 1fr 1fr; 
+            
+            /* Define 2 columns of equal width */
+            grid-template-columns: 1fr 1fr;
+
+            /* fr stands for "fractional unit", and it's used to divide available space in a flexible way inside a grid container.
+            1fr means "one part of the available space".
+            It's used in grid-template-rows and grid-template-columns. 
+            So if the container is 400px wide and there's a 10px gap between columns:
+            Available width = 400px − 10px (gap) = 390px
+            Each column gets ½ of 390px = 195px*/
+            
+            background-color: black; /* Background of the grid container */            
+            gap: 10px; /* Space between grid items (both rows and columns) */
+            padding: 10px;
+            height: 400px;
+            width: 400px;
+        }
+
+        .first {
+            background-color: orange;
+        }
+        .second {
+            background-color: green;
+        }
+        .third {
+            background-color: red;
+        }
+        .fourth {
+            background-color: brown;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Each box is automatically placed in the grid in order -->
+        <div class="box first">1</div>   <!-- Row 1, Column 1 -->
+        <div class="box second">2</div>  <!-- Row 1, Column 2 -->
+        <div class="box third">3</div>   <!-- Row 2, Column 1 -->
+        <div class="box fourth">4</div>  <!-- Row 2, Column 2 -->
+    </div>
+</body>
+</html>
