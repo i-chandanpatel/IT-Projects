@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <style>
+        *{
+            padding: 0px;
+            margin: 0px;
+            box-sizing: border-box;
+        }
+        body{
+            height: 100vh;
+            background-color: rgb(231, 232, 234);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .box{
+            height: 400px;
+            width: 400px;
+            background-color: white;
+            padding: 50px;
+            border-radius: 5px;
+        }
+        h1{
+            text-align: center;
+            margin:10px;
+            font-style: italic;
+            color: rgb(97, 97, 212);
+        }
+        label{
+            font-size: 25px;
+            font-weight: 600;
+        }
+        input{
+            width: 100%;
+            height: 30px;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 20px;
+        }
+
+        button {
+    width: 40%;
+    font-size: 20px;
+    padding: 4px;
+    background-color: rgb(97, 97, 212);
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: red;
+}
+
+        button:hover{
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <form>
+            <h1>Login</h1>
+            <div>
+            <label for="username" style="display: block;">UserName</label>
+            <input type="text" name="" id="username" placeholder="Enter your username">
+            </div>
+
+            <div>
+            <label for="password" style="display: block;">Password</label>
+            <input type="password" name="" id="password" placeholder="Enter your password">
+            </div>
+
+            <button type="button">Login</button>
+        </form>
+    </div>
+</body>
+</html>
