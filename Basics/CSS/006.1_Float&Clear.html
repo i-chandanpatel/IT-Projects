@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        img {
+            /* 
+            Float the image to the left, allowing text to flow around it on the right side.
+            'float' removes the element from normal document flow, 
+            so the container may collapse if it only contains floated children.
+            
+            Other values for float:
+            - right: floats the element to the right.
+            - none: default, element is not floated.
+            */
+            float: left;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="border: 2px solid black; display: flow-root;">
+        <!-- 
+        The div container uses 'display: flow-root' to create a new block formatting context.
+        This ensures the container expands to include floated children (like the image).
+        Without this, the container might collapse and not wrap around the floated image properly.
+
+        Alternative methods to clear floats inside a container:
+        - Add 'overflow: auto;' or 'overflow: hidden;' to the container.
+        - Use a clearfix pseudo-element (::after) with clear: both.
+        -->
+
+        <img src="https://img.freepik.com/free-photo/closeup-scarlet-macaw-from-side-view-scarlet-macaw-closeup-head_488145-3540.jpg?semt=ais_hybrid&w=740&q=80"
+            height="300px" alt="This is an Image" />
+
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque velit inventore delectus enim doloremque
+            voluptatem eaque, placeat vitae unde sapiente rerum quaerat tempore, numquam corporis odit soluta autem
+            exercitationem. Mollitia quas, dolorum in consequuntur modi assumenda reprehenderit fugiat eos ipsa, dolor
+            quibusdam. Ab quasi, totam dignissimos magni fugit, nisi deleniti molestiae ullam odit sapiente accusantium
+            at accusamus alias et ut in Lorem ipsum dolor sit amet consectetur adipisicing elit. A laborum accusantium
+            velit corrupti, sapiente fuga natus commodi voluptate, magni ullam cupiditate obcaecati consectetur maiores
+            quis perspiciatis odit nam cum neque eligendi eos esse! Nostrum, minima. Asperiores, iusto architecto nisi
+            impedit, doloremque neque sapiente quod perspiciatis ab, esse et debitis odio delectus accusamus veniam ea.
+            Magnam delectus autem laudantium laborum ratione officia nisi? Sint dignissimos magnam nisi adipisci ea
+            libero, dolor sit iure beatae in consequatur laborum aut repellendus eum fugiat esse facere maxime
+            voluptatum, ratione illo quasi? Voluptatibus veniam adipisci neque error cumque ipsa veritatis id eaque,
+            totam deserunt eveniet iusto voluptates nostrum earum. Quod, eum iusto ducimus amet quaerat asperiores
+            corrupti recusandae ullam beatae, itaque optio, harum illum? Porro debitis labore magni esse neque est,
+            omnis dolorem aspernatur? Doloremque, rerum! Molestiae natus ipsam minima, quaerat veritatis consequuntur
+            aliquid modi quam distinctio impedit tempora. Illo et sequi quis repellat. Animi magni eaque consequuntur
+            dolor, nisi quibusdam, sint ad iure quam repudiandae nobis? Ab sequi, vero iusto minus corrupti,
+            consequuntur asperiores repellendus temporibus, laudantium distinctio veniam dolor sit maiores. Cupiditate
+            aliquam pariatur itaque a consectetur ad inventore laborum culpa. Alias, laudantium. Asperiores cum non
+            cupiditate mollitia laboriosam dignissimos iusto odio doloribus.hic! Assumenda impedit possimus, esse
+            tempore officia iure totam voluptatem
+            ullam facilis eligendi ipsam facere odio. Obcaecati corrupti, dolorum, tenetur ut tempore accusantium
+            assumenda dicta ratione eos cum iure officia praesentium voluptate, eaque expedita labore cupiditate placeat
+            voluptatibus deleniti.
+        </p>
+
+        <p style="clear: left;">
+            <!--
+            The 'clear: left;' property forces this paragraph to be displayed below any preceding floated elements
+            on the left side (in this case, the floated image).
+
+            Other clear property values:
+            - clear: right; — clears floats on the right side.
+            - clear: both; — clears floats on both sides.
+            - clear: none; — default, allows elements to flow alongside floats.
+            -->
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet minima dolorem dicta dolorum possimus labore
+            similique provident consequatur expedita porro commodi nemo, ipsum molestias esse quia culpa? Suscipit
+            architecto hic fugit ducimus dolore incidunt deserunt ex delectus itaque odit eius at sed beatae fuga neque
+            dolor laudantium cum, porro eveniet ab rerum esse! Dignissimos, ex aliquam sed corrupti recusandae quis
+            voluptas aut at quae eligendi tenetur nulla obcaecati porro earum eos placeat nam quod repellendus sequi
+            ipsam inventore illo ab et. Alias illum illo hic sapiente perspiciatis laborum eligendi labore vero
+            perferendis repudiandae nisi rerum neque ex dolorem magnam asperiores reprehenderit voluptatibus sed, rem
+            nihil doloribus omnis, sit obcaecati. Tenetur odit ab quibusdam neque quaerat incidunt earum, corrupti
+            aliquid saepe adipisci dolorem enim corporis! Sit reprehenderit eum, illo facilis, ab fugiat veritatis, quam
+            amet voluptas tempora officia blanditiis illum esse maxime ratione ipsam quia dolores alias delectus
+            praesentium totam incidunt ipsa impedit non. Provident at fuga qui, ipsum impedit atque? Reprehenderit harum
+            totam porro neque adipisci provident et dignissimos. Ipsam quo cupiditate deserunt aliquam labore eveniet
+            optio natus pariatur commodi quam. Maiores, eum. Ea, amet tenetur culpa aperiam repellendus officiis,
+            tempore ab, labore nostrum provident fuga. Dolorum minima perferendis sapiente. Lorem ipsum dolor sit amet
+            consectetur adipisicing elit. Officia aut tenetur praesentium optio illum dicta. Esse maxime cupiditate
+            ullam architecto id dolorem illum rerum! Unde fugiat deserunt consectetur numquam rem dolorem! Voluptates
+            iure consectetur ea molestias nesciunt, fugiat suscipit harum porro laudantium praesentium ex eligendi
+            voluptas mollitia temporibus blanditiis, dolorem quia incidunt debitis voluptatum quam? Aperiam quidem quae,
+            eveniet aut ullam, voluptate dolorem repudiandae illum doloribus fugit qui sequi porro aliquam atque et
+            ratione officiis vero adipisci! Inventore distinctio iste ipsa unde numquam. Ratione impedit aut itaque
+            dolores rem reprehenderit eveniet laborum, excepturi minima voluptatum ducimus ex natus, velit minus quam
+            sint! Nisi dolore, maxime enim facere tenetur ad eaque saepe earum aut laborum dolores excepturi at, vero,
+            hic impedit natus quo magni beatae quas? Dolorem mollitia amet cum optio minus, rem unde alias molestiae
+            maxime corrupti reiciendis illo. Ullam sint perferendis repellendus illo dolores aperiam saepe dolore
+            incidunt ratione ea eius quas doloribus et, laudantium aliquam voluptas placeat officia quam vero blanditiis
+            culpa facilis! Voluptatibus est ducimus minus velit libero qui, reiciendis molestias architecto iusto animi
+            eaque nesciunt! Nisi necessitatibus distinctio rerum culpa repellendus. Asperiores quam, exercitationem
+            laudantium id quidem sapiente temporibus deserunt. Esse aperiam doloremque id adipisci iusto dolores
+            corporis magnam sed repellendus architecto ipsum sequi quasi atque excepturi, aliquam voluptatibus
+            aspernatur quos blanditiis rem assumenda. Consectetur impedit temporibus iure atque nihil, facere, rem hic
+            adipisci consequatur deserunt nesciunt inventore quod! Soluta optio veniam, rerum expedita dicta inventore
+            aliquid incidunt doloribus laborum blanditiis atque ab aspernatur provident qui explicabo ipsa! Unde in,
+            optio magni necessitatibus totam asperiores est officiis animi laboriosam expedita, illum iure iusto, quidem
+            autem ipsam a quo ratione quia possimus sit tempora ab? Quibusdam, eaque ipsam? Beatae laborum maxime
+            consequuntur at, saepe error ad sed consectetur autem illo minima temporibus, officiis hic nulla
+            reprehenderit debitis!
+        </p>
+    </div>
+</body>
+
+</html>
