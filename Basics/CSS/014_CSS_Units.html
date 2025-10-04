@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understanding CSS Units</title>
+    <style>
+        /* Basic Body Styling for better readability */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        /* Main container for the content */
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h1, h2 {
+            color: #0056b3;
+        }
+
+        /* Styling for example boxes */
+        .example-box {
+            border: 2px solid #ccc;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .parent {
+            border: 2px dashed #007bff;
+            padding: 10px;
+        }
+        
+        .child {
+            border: 2px dashed #28a745;
+            padding: 10px;
+            margin-top: 10px;
+        }
+
+        code {
+            background-color: #e9ecef;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: "Courier New", Courier, monospace;
+        }
+
+        /* --- STYLES FOR EXAMPLES --- */
+
+        /* % Example */
+        .percent-parent {
+            font-size: 20px;
+            width: 100%; /* Takes full width of its container */
+        }
+        .percent-child {
+            font-size: 150%; /* 150% of 20px = 30px */
+            width: 75%; /* 75% of the parent's width */
+            background-color: #e7f3ff;
+        }
+
+        /* em Example */
+        .em-parent {
+            font-size: 16px;
+        }
+        .em-child-1 {
+            font-size: 1.5em; /* 1.5 * 16px = 24px */
+        }
+        .em-child-2 {
+            font-size: 1.5em; /* 1.5 * 24px = 36px (compounding effect) */
+        }
+        
+        /* rem Example */
+        /* Note: Browser default root font-size is usually 16px */
+        .rem-parent {
+            font-size: 30px; /* This will not affect the 'rem' unit child */
+        }
+        .rem-child {
+            font-size: 2rem; /* 2 * 16px (root font-size) = 32px */
+        }
+
+        /* px Example */
+        .px-example {
+            font-size: 18px; /* Fixed size */
+            width: 300px; /* Fixed width */
+            background-color: #e7f3ff;
+        }
+
+        /* vh Example */
+        .vh-example {
+            height: 40vh; /* 40% of the viewport height */
+            background-color: #d4edda;
+            border-color: #28a745;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* vw Example */
+        .vw-example {
+            width: 80vw; /* 80% of the viewport width */
+            background-color: #fff3cd;
+            border-color: #ffc107;
+            padding: 10px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Guide to CSS Units</h1>
+        <p>In this article, we will see how to set CSS units in different ways and understand their behavior through examples.</p>
+        
+        <hr>
+
+        <h2>% (Percentage)</h2>
+        <p>The <code>%</code> unit is relative to a value set on the parent element. For <code>font-size</code>, it's relative to the parent's font size. For properties like <code>width</code> or <code>height</code>, it's relative to the parent's width or height.</p>
+        <div class="example-box">
+            <div class="parent percent-parent">
+                Parent Element (font-size: 20px, width: 100%)
+                <div class="child percent-child">
+                    Child Element (font-size: 150%, width: 75%)
+                    <p style="font-size: 12px; margin-top: 10px;">The font size here is 150% of 20px (30px). The width is 75% of the parent's width.</p>
+                </div>
+            </div>
+        </div>
+
+        <h2>em</h2>
+        <p>The <code>em</code> unit is relative to the <code>font-size</code> of the element itself. If the element doesn't have a font-size set, it inherits it from its parent. This can lead to a "compounding" effect when nested.</p>
+        <p><strong>Note:</strong> <code>2em</code> means 2 times the size of the current font context.</p>
+        <div class="example-box">
+            <div class="parent em-parent">
+                Parent (font-size: 16px)
+                <div class="child em-child-1">
+                    Child 1 (font-size: 1.5em). Calculated size: 1.5 * 16px = 24px.
+                    <div class="child em-child-2">
+                        Child 2 (font-size: 1.5em). Calculated size: 1.5 * 24px = 36px. This shows compounding.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2>rem (Root em)</h2>
+        <p>The <code>rem</code> unit is relative only to the browser's base <code>font-size</code>, which is set on the root element (<code>&lt;html&gt;</code>). The default is almost always 16px. This unit avoids the compounding issue of <code>em</code>.</p>
+        <div class="example-box">
+             <div class="parent rem-parent">
+                Parent (font-size: 30px). This font-size is ignored by the `rem` unit below.
+                <div class="child rem-child">
+                    Child (font-size: 2rem). Calculated size: 2 * 16px (root) = 32px.
+                </div>
+            </div>
+        </div>
+
+        <h2>px (Pixels)</h2>
+        <p>The <code>px</code> unit is an absolute, fixed-size unit. A pixel is a single dot on the screen. It is not scalable and is often used for elements that should remain a constant size, like borders.</p>
+        <p><strong>Note:</strong> On a standard display, <code>96px = 1in</code>.</p>
+        <div class="example-box">
+            <div class="px-example">
+                This box has a fixed <code>font-size</code> of 18px and a fixed <code>width</code> of 300px. It will not change if you resize the browser or change the base font size.
+            </div>
+        </div>
+
+        <h2>vh (Viewport Height)</h2>
+        <p>The <code>vh</code> unit is relative to 1% of the height of the viewport (the visible area of the browser window). <code>100vh</code> is the full height of the viewport.</p>
+        <div class="example-box vh-example">
+            <p>This box has a height of <code>40vh</code>.<br>Try resizing the height of your browser window to see it change.</p>
+        </div>
+        
+        <h2>vw (Viewport Width)</h2>
+        <p>The <code>vw</code> unit is relative to 1% of the width of the viewport. <code>100vw</code> is the full width of the viewport.</p>
+        <div class="example-box vw-example">
+            <p>This box has a width of <code>80vw</code>. Try resizing the width of your browser window to see it change.</p>
+        </div>
+        
+        <hr>
+
+        <h2>Notes & Best Practices</h2>
+        <div class="example-box" style="background-color: #f8f9fa;">
+            <ul>
+                <li><strong>Absolute vs. Relative:</strong>
+                    <ul>
+                        <li><strong>Absolute Units:</strong> <code>px</code>. They are fixed and do not change based on any other element or setting.</li>
+                        <li><strong>Relative Units:</strong> <code>%</code>, <code>em</code>, <code>rem</code>, <code>vh</code>, <code>vw</code>. They are flexible and scale with respect to another value.</li>
+                    </ul>
+                </li>
+                <br>
+                <li><strong>When to Use What?</strong>
+                    <ul>
+                        <li>Use <strong><code>rem</code></strong> for font sizes, margins, and padding to create a scalable and accessible design. This is the modern standard for most sizing.</li>
+                        <li>Use <strong><code>em</code></strong> when you want an element's size to be relative to its own font-size context (e.g., the padding on a button should scale with its text).</li>
+                        <li>Use <strong><code>%</code></strong> for creating fluid layouts, like columns in a grid that should take up a percentage of their container's width.</li>
+                        <li>Use <strong><code>px</code></strong> for things that must not scale, like borders (e.g., <code>border: 1px solid black;</code>) or when working with fixed-size design elements.</li>
+                        <li>Use <strong><code>vh</code></strong> and <strong><code>vw</code></strong> for sizing elements relative to the browser window, which is perfect for full-screen hero sections or layout elements that should always be visible.</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+</body>
+</html>
