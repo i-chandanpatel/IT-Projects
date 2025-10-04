@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animations</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: black;
+        }
+
+        .container{
+            padding: 20px;
+            position: relative;
+        }
+
+        .box{
+            height: 100px;
+            width: 150px;
+            background-color: orange;
+            animation-name: moving;
+            animation-duration: 9s;
+            animation-iteration-count: infinite;
+            animation-timing-function: ease-out;
+            animation-direction: alternate;
+            animation-delay: 1s;
+            /* animation-fill-mode: forwards; */
+            position: absolute;
+        }
+
+        /* @keyframes moving {
+            from{
+                background-color: aliceblue;
+                left: 10px;
+            }
+            to{
+                background-color: blue;
+                left: 500px;
+            }
+        } */
+
+        @keyframes moving {
+            0%{
+                background-color: aliceblue;
+                top: 10px;
+                left: 10px;
+            }
+            25%{
+                background-color: gray;
+                top: 10px;
+                left: 900px;
+            }
+            50%{
+                background-color: aquamarine;
+                top: 350px;
+                left: 900px;
+            }
+            75%{
+                background-color: blueviolet;
+                top: 350px;
+                left: 10px;
+            }
+            100%{
+                background-color: blue;
+                top: 10px;
+                left: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box"></div>
+    </div>
+</body>
+</html>
