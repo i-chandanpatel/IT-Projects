@@ -1,6 +1,6 @@
 // let: It's block scoped
 // var: It's funtion scoped
-// Primitive Data Types:They are immutable, if value changed they created at a new memory address 
+// Primitive Data Types:They are immutable, if value changed they created at a new memory address. They follow copy by value. i.e let a=1; let b=a; b=2; even than a will be 1
 var a=1;
 var b="a10.5";  //String
 var bool=true;
