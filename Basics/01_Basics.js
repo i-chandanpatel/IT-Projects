@@ -1,22 +1,28 @@
 // let: It's block scoped
 // var: It's funtion scoped
-// Data Types
+// Primitive Data Types:They are immutable, if value changed they created at a new memory address 
 var a=1;
 var b="a10.5";  //String
 var bool=true;
 var c;  //Undefined: Absence of value
 var d=null; //NULL: Explicitely define absence of value but its type of "null" is "object"
 
+
 //String to Number
 console.log(typeof +b);
 console.log(typeof Number(b));
 console.log(parseInt(b));   //It only keeps int part gives NaN if char is present
 console.log(parseFloat(b)); //Gives NaN if char is present
+
+
 //Number to String
 console.log(typeof String(a));
 console.log(typeof (b+""));
+
+
 // Check Nan
 console.log("'10' is NaN ",isNaN("10"),"10 is NaN ", isNaN(10),"'a10 is NaN '", isNaN("a10"));
+
 
 //Tricky questions
 console.log(`\n\n\n11-"10"= `, 11-"10", ". Type is of type", typeof(11-"10") );
