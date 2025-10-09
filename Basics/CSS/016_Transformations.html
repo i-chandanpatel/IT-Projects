@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transformations</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        .container{
+            height: 100vh;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            perspective: 700px;
+        }
+        .box{
+            background-color: orange;
+            height: 150px;
+            width: 150px;
+            transition: all 3s;
+            cursor: pointer;
+          
+        }
+        .box:hover{
+            background-color: brown;
+            /* 2D Translations */
+            /* transform: translate(200px,300px);           */
+            /* scaleX(2);
+            rotate(40deg);
+            rotatex(30deg);
+            skewX(60deg);
+            translateX(200px); */
+
+            /* For 3D transform: Prespective needs to set first */
+            transform: translateZ(200px);       /* Comes closer from its 700px prespective to 700-200=500px
+            It seems like it is zooming but to show that it's is coming closer its like that */
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box"></div>
+        <div class="box"></div>
+    </div>
+</body>
+</html>
