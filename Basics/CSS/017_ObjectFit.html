@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Object Fit Properties</title>
+    <style>
+        .container {
+            height: 300px;
+            width: 300px;
+            border: 2px solid black;
+            margin-bottom: 20px;
+            padding: 10px;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #first {
+            height: 200px;
+            width: 200px;
+            object-fit: cover;
+            /* Image covers the box, may crop sides */
+            object-position: center center;
+            /* Centers the image inside the box */
+            border: 2px solid blue;
+            box-sizing: border-box;
+        }
+
+        #second {
+            height: 300px;
+            width: 300px;
+            object-fit: fill;
+            /* Stretches image to fill box, distorts aspect ratio */
+        }
+
+        #third {
+            height: 200px;
+            width: 200px;
+            object-fit: contain;
+            /* Scales image to fit inside the box without cropping */
+            border: 2px solid green;
+            box-sizing: border-box;
+        }
+
+        #fourth {
+            height: 200px;
+            width: 200px;
+            object-fit: scale-down;
+            /* Acts like 'contain' or 'none', whichever is smaller */
+            border: 2px solid red;
+            box-sizing: border-box;
+        }
+
+        .image {
+            background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIgWCIkhgrLPlYIKqac2-8sBcq8Cr8bz8WJQ&s);
+            /* Ensures the image doesn't repeat in any direction */
+            background-repeat: no-repeat;
+            /* Uncomment only one at a time to see different effects */
+            /*
+    background-clip: border-box;  // Default: background is visible under content, padding, and border
+    background-clip: padding-box; // Background is visible under content and padding, not border
+    */
+            background-clip: content-box;
+            /* Background is only visible in the content area (not padding or border) */
+            height: 300px;
+            width: 300px;
+            border: 2px solid black;
+            padding: 20px;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+        }
+
+        /* New styles to keep text inside the container */
+        .note {
+            padding: 10px;
+            box-sizing: border-box;
+            margin-top: 10px;
+            text-align: center;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- First Image: object-fit: cover -->
+    <div class="container">
+        <img id="first"
+            src="https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aW1hZ2V8ZW58MHx8MHx8fDA%3D"
+            alt="" />
+        <div class="note">
+            <strong>object-fit: cover;</strong><br />
+            Image fills the element while maintaining aspect ratio. Parts may be cropped.
+        </div>
+    </div>
+
+    <!-- Second Image: object-fit: fill -->
+    <div class="container">
+        <img id="second"
+            src="https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aW1hZ2V8ZW58MHx8MHx8fDA%3D"
+            alt="" />
+        <div class="note">
+            <strong>object-fit: fill;</strong><br />
+            Image stretches to fill the element. Aspect ratio is <em>not preserved</em>.
+        </div>
+    </div>
+
+    <!-- Third Image: object-fit: contain -->
+    <div class="container">
+        <img id="third"
+            src="https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aW1hZ2V8ZW58MHx8MHx8fDA%3D"
+            alt="" />
+        <div class="note">
+            <strong>object-fit: contain;</strong><br />
+            Image is scaled to fit inside the box. Aspect ratio is preserved, may leave empty space.
+        </div>
+    </div>
+
+    <!-- Fourth Image: object-fit: scale-down -->
+    <div class="container">
+        <img id="fourth"
+            src="https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aW1hZ2V8ZW58MHx8MHx8fDA%3D"
+            alt="" />
+        <div class="note">
+            <strong>object-fit: scale-down;</strong><br />
+            Uses either <code>none</code> or <code>contain</code>, whichever is smaller. Aspect ratio preserved.
+        </div>
+    </div>
+
+    <!-- Background Image with background-clip -->
+    <div class="image">
+        <div class="note">
+            <strong>background-image</strong> with:<br />
+            <code>background-repeat: no-repeat;</code><br />
+            <code>background-clip: content-box;</code><br />
+            Image is shown only within the content area, not padding or border.
+        </div>
+    </div>
+
+    <!-- Default image rendering -->
+    <div class="container">
+        <img src="https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aW1hZ2V8ZW58MHx8MHx8fDA%3D" alt="" />
+        <div class="note">
+            <strong>No object-fit applied;</strong><br />
+            Image displayed using default browser behavior. Fills width unless constrained.
+        </div>
+    </div>
+</body>
+
+</html>
