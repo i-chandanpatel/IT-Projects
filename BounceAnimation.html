@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bounce Animation</title>
+    <style>
+        .container {
+    height: 80vh;
+    background-color: black;
+    position: relative;
+}
+
+.ball {
+    background-color: red;
+    border-radius: 50%;
+    height: 15vh;
+    width: 12vw;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    animation: BounceBall 6s linear infinite alternate;
+}
+
+@keyframes BounceBall {
+            0%{
+                transform: translate(0);
+            }10%{
+                transform: translateY(-30vh) translateX(10vw);
+                background-color: aqua;
+            }20% {
+                transform: translateY(0vh) translateX(20vw);
+                background-color: red;
+            }30%{
+                transform: translateY(-30vh) translateX(30vw);
+                background-color: wheat;
+            }40%{
+                transform: translateY(0vh) translateX(40vw);
+                background-color: blueviolet;
+            }50%{
+                transform: translateY(-30vh) translateX(50vw);
+                background-color:blue;
+            }60%{
+                transform: translateY(0vh) translateX(60vw);
+                background-color: chartreuse;
+            }70%{
+                transform: translateY(-30vh) translateX(70vw);
+                background-color:antiquewhite;
+            }80%{
+                transform: translateY(0vh) translateX(80vw);
+                background-color: pink;
+            }90%{
+                transform: translateY(-20vh) translateX(85vw);
+                background-color: aqua;
+            }100%{
+                transform: translateY(0vh) translateX(92vw);
+                background-color: gray;
+            }
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="ball"></div>
+    </div>
+</body>
+</html>
