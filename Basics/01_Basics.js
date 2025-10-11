@@ -157,9 +157,10 @@ slicee=arr1.slice(1,3); //Copies elements
 console.log("\nslice(Doesn't affect original array): ",slicee);
 
 console.log("\nOriginal array before Splice",arr1);
-splicee=arr1.splice(1,3,"Adds Element","After two entries");
-console.log("splice(Copies elements and removes from original array): ",splicee);
+splicee=arr1.splice(1,3,"Adds Element","After two entries");    //Remove 3 elements from index 1 & add 2 values specified
+console.log("splice(modifies the original array): ",splicee);
 console.log("Original array after Splice",arr1);
+splicee=arr1.splice(1,3);    //Delete values from original array & adds nothing 
 
 console.log(arr1.toSpliced(1,1,"15"))    //Starts deleting from index 1 and delets 1 val and puts 15 at that position
 
