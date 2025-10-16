@@ -140,23 +140,33 @@ let arr2=new Array(4,5,6)
 console.log("\n\n\nArray 1: ",arr1);
 console.log("Array 2: ",arr2);
 console.log(`\narr1.at(1) gives according to normal index ${arr1.at(1)}; But useful if want to search with -ve index arr1.at(-1) ${arr1.at(-1)}`);
-arr1.push(9)
+
+arr1.push(9)    //Insert at end
 console.log("\nAfter arr1.push(9): ",arr1);
-arr1.pop()
+
+arr1.pop()  //Deletes from end
 console.log("\nAfter arr1.pop(): ",arr1);
-arr1.unshift(2)
+
+arr1.unshift(2)     //Add at starting
 console.log("\narr1.unshift(2) adds element at starting ",arr1);
-arr1.shift()
+
+arr1.shift()    //Remove from starting
 console.log("\narr1.shift() removes from starting",arr1);
+
 console.log("\narr1.includes(5) ",arr1.includes(5));
+
 console.log("\narr1.indexOf(5) ",arr1.indexOf(5,1),"\n. arr1.lastIndexOf(5) ",arr1.lastIndexOf(5,1));   //Start index 1 is given indexOf goes fwd 1 to 4 and lastIndexOf goes backword 1 to 0
+
 var a=arr1.join()
 console.log("\nJoin makes Array into string",a);
 
-slicee=arr1.slice(1,3); //Copies elements
-console.log("\nslice(Doesn't affect original array): ",slicee);
+//Slice doesn't change actual array
+slicee=arr1.slice(1,3);     //Returns elements from index 1 to index 3
+console.log("\nslice array: ",slicee);
 
 console.log("\nOriginal array before Splice",arr1);
+
+//splice changes actual Array
 splicee=arr1.splice(1,3,"Adds Element","After two entries");    //Remove 3 elements from index 1 & add 2 values specified
 console.log("splice(modifies the original array): ",splicee);
 console.log("Original array after Splice",arr1);
@@ -186,6 +196,7 @@ console.log("\nCreated array using Array.of(a1,a2,a3): ",Array.of(a1,a2,a3));
 
 var fruits=["Apple","Banana","Grapes"]
 
+//.reverse()    ->Changes actual array
 //Destructuring array
 var [a,b,c]=fruits;
 console.log(a);
@@ -210,20 +221,17 @@ console.log(a.flat(Infinity))
 //     }
 // }
 
-//Difference: forEach-can't return, map can return; if changes made both will change original array
+
+//Difference: forEach-can't return, map can return; if changes made forEach will change original array
 //forEach Loop 
-// var loop=fruits.forEach(function(curVal, index, array){
-//     console.log(curVal);
-//     console.log(index);
-//     console.log(array);
-// })
-// var loop=fruits.forEach((curVal,index,array)=>{
+// fruits.forEach(function(curVal, index, array){
 //     console.log(curVal);
 //     console.log(index);
 //     console.log(array);
 // })
 
-// //map
+
+// //map:Only use when have to create a new array on the basis of old array. Doesn't change original array
 var a=[10,12,10,13]
 // var loop=a.map((curVal,index,array)=>{
 //     if (curVal%2==0) {
@@ -232,12 +240,13 @@ var a=[10,12,10,13]
 // }).filter((curVal)=> curVal!=undefined);
 // console.log(loop);
 
-// //filter:Not change original
 
+// //filter:Not change original. As map can return value but it can only return true or false
 // var ans=a.filter((cur,ind,arr)=>{
 //     return cur>11;
 // })
 // console.log(ans);
+
 
 // //sort:ascending
 // a.sort((b,c)=>{
@@ -246,11 +255,17 @@ var a=[10,12,10,13]
 // })
 // console.log(a);
 
-// //Reduce
-// var initialAccuVal=0;
+
+// a.sort((a,b)=>{
+//     return a-b;   //For Ascending and b-a for Descending Order
+// })
+
+
+// //Reduce: Ek array se ek single value banana
+// var initialAccumulatorVal=0;
 // var total=a.reduce((accumulator,crr,ind,arr)=>{
 //     return accumulator+crr;
-// },initialAccuVal);
+// },initialAccumulatorVal);
 // console.log(total);
 
 
@@ -306,7 +321,7 @@ let obj1={
     [sym]:"AK-47",
     Profession:"Coding",
     Age:"20",
-    "Location":"Delhi"
+    "Location":"Delhi",
     greet: function (){
         return "Hello! from obj1"
     }
@@ -412,4 +427,3 @@ console.log(Object.fromEntries(entries))
  var a=0;
 console.log("a || 10 ",a || 10)
 console.log("a ?? 10 ",a ?? 10)
-
