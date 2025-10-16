@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: black;
+            color: azure;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="a">DOM</h1>
+    <ul>
+        <li>Li 1</li>
+        <li>Li 2</li>
+        <li>Li 3</li>
+        <li>Li 4</li>
+        <li><a href="https://facebook.com">Link</a></li>
+    </ul>
+    <p id="1" class="a">Paragraph</p>
+</body>
+<script>
+    var a =document.getElementById(1);
+    console.log(document.body.childNodes);
+    console.log(document.body.children);
+    console.log(document.body.firstChild);
+    console.log(document.body.firstElementChild);
+    console.log(document.body.firstElementChild.nextSibling);
+    console.log(document.body.firstChild.nextElementSibling);
+    console.log(document.body.lastChild);
+    console.log(document.body.lastElementChild.previousElementSibling);
+    console.log(document.body.lastChild.previousSibling);
+
+    a=document.getElementsByClassName("a")  //Gives array like structure
+    console.log(...a);
+
+    //Manipulation can be done by these
+    for (const node of a) {
+        console.log(node.innerHTML);
+        console.log(node.innerText);
+        console.log(node.textContent);
+    }
+    console.log(document.getElementsByTagName("p"));    //Gives array like structure
+    // console.log(document.querySelector("#1"));       //This is wrong
+    console.log(document.querySelector('[id="1"]'));
+    console.log(document.querySelector(".a"));
+    console.log(document.querySelector("li"));  //Selects first "li" from the body
+    console.log(document.querySelectorAll("li"));   //Gives array like structure(NodeList)
+
+    // Changing attribute of a tag
+    a=document.getElementsByTagName("a")[0];    //Always have to specify which value we want to select
+    a.href="https://google.com";
+
+    console.log(a.getAttribute("href"));
+    a.setAttribute("href","https://youtube.com");
+    console.log(a.getAttribute("href"));
+    
+    a.removeAttribute("href");      //anchor tag now don't have the href attribute
+    console.log(a);
+    a.setAttribute("href","https://youtube.com");
+    console.log(a);
+
+    var h1=document.createElement("h1");
+    h1.textContent="Dynamically Added";
+    document.body.append(h1);   //append adds it to the end, if prepend used it will added to the start
+
+    //Changing css
+    h1.style.color="blue";
+    h1.style.backgroundColor="green"
+
+    a=document.getElementsByClassName("a")
+    console.log(a);
+    a[1].classList.toggle("a");
+    console.log(a);     //Now paragraph will not come because we selected using className and removed the class from it
+    
+</script>
+</html>
