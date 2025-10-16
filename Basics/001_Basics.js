@@ -194,11 +194,11 @@ var a2=[200,600];
 var a3=300;
 console.log("\nCreated array using Array.of(a1,a2,a3): ",Array.of(a1,a2,a3));
 
-var fruits=["Apple","Banana","Grapes"]
+var fruits=["Apple","Banana","Grapes","Mango"]
 
 //.reverse()    ->Changes actual array
 //Destructuring array
-var [a,b,c]=fruits;
+var [a,b,,c]=fruits;   //Stored the first two value of the array as a & b and 4th value as c
 console.log(a);
 
 var a=[1,[2,3,[4]],5]
@@ -269,6 +269,31 @@ var a=[10,12,10,13]
 // console.log(total);
 
 
+// find -> Returns first value that matched
+var a=[
+    {id:1,key:1},
+    {id:2,key:2},
+    {id:3,key:1},
+]
+var ans=a.find((val)=>{
+    return val.key===1;
+});
+console.log(ans);   //{id:1,key:1}
+
+
+//some ->returns bool value if the particular condition is valid by any value, even if one value pass the condition it returns true
+var a=[1,3,65,90];
+ans=a.some((val)=>{
+    return val>85;
+});
+console.log(ans);   //true
+
+//every ->returns bool value if the particular condition is valid by all value, even if one value fails the condition it returns false
+ans=a.every((val)=>{
+    return val>85;
+});
+console.log(ans);   //false
+
 
 //Maths
 console.log("Absoulute of -43: ",Math.abs(-43));
@@ -313,10 +338,11 @@ console.log(myDate.toLocaleString());
 console.log("\n\n\n Objects");
 const sym=Symbol("AK");
 console.log(sym.prototype.description)
-
+var role="admin"
 // Object using Literal 
 let obj1={
     Name:"Denver",
+    [role]:"Raj",
     //sym:"AK-47", //Wrong method to acces Symbol it returns string
     [sym]:"AK-47",
     Profession:"Coding",
@@ -360,7 +386,7 @@ console.log(obj1.funcc())
 
 var a=new Object()      //Singlton Object
 a.FullName={
-    FirstName:"Riya",
+    FirstName:"Raj",
     LastName:"Tiwari"
 }
 a.isIn=false;
@@ -399,10 +425,18 @@ console.log("var {instructor:i}=a; now can acces using only i ",i);
 
 var b={address:{
         city:"NYC",
-        zip:1234
-}}
+        zip:1234,
+        locations:{
+            lat:23.2,
+            lng:77.4
+        }
+    }
+}
 console.log(b.address ? b.address.city : "City is not present")
 console.log(b.address?.city ?? "City is not present")    //Optional Chaining
+
+var{lat,lng}=b.address.locations;
+console.log(lat);   //Can directly access this value
 
 // this keyword
 //         In an object methode, this refers to the object
@@ -417,13 +451,48 @@ var a="GitHub"
 console.log(a.padStart(15,"*"))
 console.log(a.padEnd(15,"*"))
 
-//Entries-Converts obj to array and fromEntries=converts array to obj
+//Entries   -> Converts obj to array
+//fromEntries   -> Converts array to obj
 var a={name:"Denver", age:25}
 var entries=Object.entries(a);
 console.log(entries)
 console.log(Object.fromEntries(entries))
 
+// Object.keys(obj) -> Makes the array of the keys only
+var key=Object.keys(a);
+console.log(key);
 //Nullish Coalescing Operator= Returns RHS value if LHA have null or undefined value otherwise  retruns LHS
  var a=0;
 console.log("a || 10 ",a || 10)
 console.log("a ?? 10 ",a ?? 10)
+
+var obj={
+    name:"Random",
+    age:25,
+    email:"test@test.com"
+}
+
+for (var key in obj) {
+    var element = obj[key];     //obj.key will not work
+    console.log(element);
+}
+
+var newObj=Object.assign({newProp:"daf"}, obj);     //Adds all the props of obj with the first provided obj and returns a obj
+
+var b={
+    name:"Raghav",
+    address:{
+        city:"NYC",
+        zip:1234,
+        locations:{
+            lat:23.2,
+            lng:77.4
+        }
+    }
+}
+
+var c={...b};   //The non nested value will have different copies but the nested ones will have the same reference
+
+//Deep copy is used to solve this problem. Deep copy is done like this
+var str=JSON.stringify(b);
+var newObj=JSON.parse(str);
