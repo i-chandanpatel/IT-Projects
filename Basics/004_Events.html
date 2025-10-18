@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML Events</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 30px;
+      line-height: 1.6;
+    }
+    div, input, textarea, select, video {
+      margin: 15px 0;
+      padding: 10px;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+    }
+    .section-title {
+      font-weight: bold;
+      color: #333;
+      margin-top: 40px;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 🖱️ MOUSE EVENTS -->
+  <div class="section-title">Mouse Events</div>
+
+  <div onclick="console.log('Div clicked!')">Click inside this box</div>
+  <!-- 
+    🔸 Works on: Any visible element (button, link, img, div, span, etc.)
+    Other mouse events:
+      - ondblclick → double-click on any clickable element
+      - onmouseover → pointer enters an element (div, img, etc.)
+      - onmouseout → pointer leaves the element
+      - onmousedown / onmouseup → mouse button pressed / released
+      - onmousemove → pointer moves within the element
+      - oncontextmenu → right-click on any element
+  -->
+
+  <!-- ⌨️ KEYBOARD EVENTS -->
+  <div class="section-title">Keyboard Events</div>
+
+  <input type="text" placeholder="Type here..." onkeydown="console.log('Key pressed!')">
+  <!--
+    🔸 Works on: input, textarea, document, window
+    Other keyboard events:
+      - onkeyup → key released (useful for validation)
+      - onkeypress (deprecated) → printable key pressed
+  -->
+
+  <!-- 🧾 FORM EVENTS -->
+  <div class="section-title">Form Events</div>
+
+  <form onsubmit="alert('Form submitted!'); return false;">
+    <input type="text" placeholder="Focus here" 
+           onfocus="console.log('Input focused!')" 
+           onblur="console.log('Input blurred!')">
+    <input type="submit" value="Submit">
+  </form>
+  <!--
+    🔸 Works on: input, textarea, select, form
+    Other form events:
+      - onchange → input/select/textarea when value changes and loses focus
+      - oninput → input/textarea when value changes instantly (every keystroke)
+      - onreset → form when reset button clicked
+      - onselect → text selected inside input/textarea
+      - onfocus / onblur → input, textarea, select, button
+  -->
+
+  <!-- 🌐 WINDOW / DOCUMENT EVENTS -->
+  <div class="section-title">Window / Document Events</div>
+
+  <div style="height:100px; overflow:auto;" onscroll="console.log('Div scrolled!')">
+    Scroll inside this box<br><br>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus non neque sed eros imperdiet porttitor. 
+    Suspendisse in urna eget justo posuere aliquam. Cras bibendum porta orci.
+  </div>
+  <!--
+    🔸 Works on: window, body, document, scrollable elements
+    Other window/document events:
+      - onload → body, img, iframe, script (when fully loaded)
+      - onunload → body/window (when user leaves the page)
+      - onresize → window (when size changes)
+      - onerror → window, img, script (if resource fails to load)
+  -->
+
+  <!-- 📋 CLIPBOARD EVENTS -->
+  <div class="section-title">Clipboard Events</div>
+
+  <input type="text" placeholder="Try copying text" oncopy="console.log('Text copied!')">
+  <!--
+    🔸 Works on: input, textarea, contenteditable elements (div, p, etc.)
+    Other clipboard events:
+      - oncut → triggered when user cuts text
+      - onpaste → when pasted into an element
+  -->
+
+  <!-- 📦 DRAG & DROP EVENTS -->
+  <div class="section-title">Drag & Drop Events</div>
+
+  <div draggable="true" ondragstart="console.log('Dragging started!')">Drag this box</div>
+  <!--
+    🔸 Works on: elements with draggable="true" (img, div, text, etc.)
+    Other drag events:
+      - ondrag → while dragging
+      - ondragover → when hovering over a drop target
+      - ondrop → when item is dropped onto a valid target
+      - ondragend → after drag completes
+  -->
+
+  <!-- 🎵 MEDIA EVENTS -->
+  <div class="section-title">Media Events</div>
+
+  <video width="300" controls 
+         onplay="console.log('Video playing!')" 
+         onpause="console.log('Video paused!')">
+    <source src="sample.mp4" type="video/mp4">
+    Your browser does not support video playback.
+  </video>
+  <!--
+    🔸 Works on: <audio>, <video>
+    Other media events:
+      - onended → when playback finishes
+      - onvolumechange → when volume changes
+      - ontimeupdate → during playback (updates each frame)
+      - onerror → if media fails to load
+      - oncanplay → when enough data is loaded to play
+  -->
+
+  <!-- ⚙️ MISCELLANEOUS EVENTS -->
+  <div class="section-title">Miscellaneous Events</div>
+
+  <div onwheel="console.log('Mouse wheel used!')" style="height:80px; overflow:auto;">
+    Scroll using mouse wheel inside this box
+  </div>
+  <!--
+    🔸 Works on: any scrollable or visible element
+    Other misc events:
+      - onmouseenter / onmouseleave → enter/leave element (no bubbling)
+      - ontouchstart / ontouchmove / ontouchend → for mobile touch interactions
+      - ontransitionend → elements with CSS transitions (div, img, etc.)
+      - onanimationend → elements with CSS animations
+  -->
+
+</body>
+    </html>
