@@ -496,3 +496,4 @@ var c={...b};   //The non nested value will have different copies but the nested
 //Deep copy is used to solve this problem. Deep copy is done like this
 var str=JSON.stringify(b);
 var newObj=JSON.parse(str);
+
