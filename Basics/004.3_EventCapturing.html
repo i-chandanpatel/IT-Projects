@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Capturing</title>
+</head>
+<body>
+    <!-- Event Capturing: Clicked on an element than its event listener will be called and than its childs 
+     listener will start running, this will happen till the last child. -->
+
+     <div id="a" style="width: 80vw; height: 80vh; background-color: red;">
+        <div id="b" style="width: 80%; height: 80%; background-color: aqua;">
+            <div id="c" style="width: 80%; height: 80%; background-color: blue;">
+                <button type="button">Click Me</button>
+            </div>
+        </div>
+     </div>
+    
+    
+    <script>
+        document.querySelector("button").addEventListener("click", ()=>{
+            console.log("button clicked");
+        },true);
+        document.getElementById("a").addEventListener("click", ()=>{
+            console.log("clicked a");
+        },true);
+        // document.getElementById("b").addEventListener("click", ()=>{
+        //     console.log("clicked b");
+        // },true);
+        
+        document.getElementById("c").addEventListener("click", ()=>{
+            console.log("clicked c");
+        },true);
+    </script>
+</body>
+</html>
