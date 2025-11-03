@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Bubbling</title>
+    <style>
+
+    </style>
+</head>
+
+<body style="background-color: black; color: antiquewhite;">
+    <!-- Event Bubbling: Clicked on an element.If there is no event listener on the element, than 
+    browser will search for listener on its parent and if also not there than its parent uptill <html></html>.
+     -->
+    <div id="main">
+        <div id="nav" style="display: flex; justify-content: space-around; ">
+            <a href="">Home</a>
+            <a href="">About</a>
+            <button>Submit</button>
+            
+        </div>
+    </div>
+    <ul>
+        <li>Apple</li>
+        <li>Banana</li>
+        <li>Mango</li>
+        <li>Guava</li>
+    </ul>
+
+    <script>
+        document.querySelector("div").addEventListener("click", () => alert("Clicked on nav"));
+        
+        document.getElementsByTagName("ul")[0].addEventListener("click", (details) => {
+            details.target.style.textDecoration = "line-through";
+        });
+
+    </script>
+</body>
+
+</html>
