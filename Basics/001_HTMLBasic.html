@@ -16,6 +16,87 @@
     a:hover {
       background-color: beige;
     }
+
+    form {
+      background-color: #fff;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 500px;
+    }
+    label {
+      display: block;
+      font-weight: 600;
+      margin-top: 15px;
+      margin-bottom: 5px;
+      color: #333;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="number"],
+    input[type="date"],
+    input[type="color"],
+    input[type="file"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 15px;
+      transition: border-color 0.3s ease;
+      box-sizing: border-box;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: #007bff;
+      outline: none;
+    }
+
+    select[multiple] {
+      height: 120px;
+    }
+
+    /* Checkbox and radio groups */
+    .options-group {
+      margin-top: 8px;
+      margin-bottom: 10px;
+    }
+
+    .options-group label {
+      display: inline-block;
+      margin-right: 15px;
+      font-weight: normal;
+      cursor: pointer;
+    }
+
+    input[type="checkbox"],
+    input[type="radio"] {
+      margin-right: 5px;
+      accent-color: #007bff; /* modern browsers support this */
+    }
+
+    /* Submit button */
+    input[type="submit"] {
+      margin-top: 20px;
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      width: 100%;
+      transition: background-color 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #0056b3;
+    }
   </style>
 </head>
 
@@ -52,7 +133,9 @@
       <li>
         <h3><a href="#Audio">Audio</a></h3>
       </li>
-      <li></li>
+      <li>
+        <h3><a href="#form">Form</a></h3>
+      </li>
       <li></li>
     </ol>
   </nav>
@@ -258,6 +341,79 @@
 <audio src="udio.mp3"controls preload="auto" id="Audio"> </audio>
 
 <p> &lt;p&gt; is used for Paragraph. &amp;nbsp; is used for space</p>
+
+<br><br>
+<form>
+    <h2>Example Form</h2>
+
+    <!-- Text-based inputs -->
+    <label for="text">Text:</label>
+    <input type="text" id="text" placeholder="Enter text">
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" placeholder="you@example.com">
+
+    <label for="number">Number:</label>
+    <input type="number" id="number" min="0" max="100">
+
+    <!-- Categorized Select Dropdown -->
+    <label for="skills">Select Your Skills (multiple allowed):</label>
+    <select id="skills" name="skills" multiple>
+      <optgroup label="Programming Languages">
+        <option>Python</option>
+        <option>JavaScript</option>
+        <option>Java</option>
+        <option>C++</option>
+      </optgroup>
+      <optgroup label="Web Technologies">
+        <option>HTML</option>
+        <option>CSS</option>
+        <option>React</option>
+        <option>Node.js</option>
+      </optgroup>
+    </select>
+
+    <!-- Checkbox group -->
+    <label>Hobbies:</label>
+    <div class="options-group">
+      <input type="checkbox" id="reading" name="hobby" value="reading">
+      <label for="reading">Reading</label>
+
+      <input type="checkbox" id="sports" name="hobby" value="sports">
+      <label for="sports">Sports</label>
+
+      <input type="checkbox" id="music" name="hobby" value="music">
+      <label for="music">Music</label>
+    </div>
+
+    <!-- Radio group -->
+    <label>Gender:</label>
+    <div class="options-group">
+      <input type="radio" id="male" name="gender" value="male">
+      <label for="male">Male</label>
+
+      <input type="radio" id="female" name="gender" value="female">
+      <label for="female">Female</label>
+    </div>
+
+    <!-- Date and color -->
+    <label for="date">Date:</label>
+    <input type="date" id="date">
+
+    <label for="color">Favorite Color:</label>
+    <input type="color" id="color">
+
+    <!-- File upload -->
+    <label for="file">Upload File:</label>
+    <input type="file" id="file">
+
+    <!-- Text area -->
+    <label for="message">Message:</label>
+    <textarea id="message" rows="4" placeholder="Type your message here..."></textarea>
+
+    <!-- Button -->
+    <input type="submit" value="Submit">
+  </form>
 </main>
 <footer>
   <p>&copy;All rights reseved</p>
