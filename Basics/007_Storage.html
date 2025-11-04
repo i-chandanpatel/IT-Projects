@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Local, Session, Cookies & JSON Demo</title>
+  <style>
+    *{
+      color: #857a7a;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background: #333;
+      padding: 20px;
+    }
+    h2 {
+      color: #857a7a;
+    }
+    .storage-box {
+      background: #333;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+    input, textarea {
+      background-color: #333;
+      padding: 8px;
+      margin: 5px 0;
+      width: 90%;
+    }
+    button {
+      background-color: #333;
+      padding: 8px 12px;
+      margin-right: 5px;
+      cursor: pointer;
+    }
+    p {
+      font-weight: bold;
+      color: #554e4e;
+    }
+  </style>
+</head>
+<body>
+  <h1>Web Storage, Cookies & JSON Demo</h1>
+
+  <!-- LOCAL STORAGE -->
+  <div class="storage-box">
+    <h2>Local Storage</h2>
+    <input type="text" id="localInput" placeholder="Enter name for local storage" />
+    <button onclick="saveLocal()">Save</button>
+    <button onclick="loadLocal()">Load</button>
+    <button onclick="clearLocal()">Clear</button>
+    <p id="output"></p>
+  </div>
+
+  <!-- SESSION STORAGE -->
+  <div class="storage-box">
+    <h2>Session Storage</h2>
+    <input type="text" id="sessionInput" placeholder="Enter data for session storage" />
+    <button onclick="saveSession()">Save</button>
+    <button onclick="loadSession()">Load</button>
+    <button onclick="clearSession()">Clear</button>
+    <p id="sessionOutput"></p>
+  </div>
+
+  <!-- COOKIES -->
+  <div class="storage-box">
+    <h2>Cookies</h2>
+    <input type="text" id="cookieName" placeholder="Enter cookie name">
+    <input type="text" id="cookieValue" placeholder="Enter cookie value">
+    <input type="number" id="cookieDays" placeholder="Expires in (days)">
+    <button onclick="setCookie()">Set Cookie</button>
+    <button onclick="getCookieValue()">Get Cookie</button>
+    <button onclick="deleteCookie()">Delete Cookie</button>
+    <p id="cookieOutput"></p>
+  </div>
+
+  <!-- JSON STORAGE -->
+  <div class="storage-box">
+    <h2>JSON + Storage Example</h2>
+    <p>Store and retrieve an array of friends using JSON.</p>
+    <button onclick="saveJSON()">Save JSON</button>
+    <button onclick="loadJSON()">Load JSON</button>
+    <button onclick="clearJSON()">Clear JSON</button>
+    <p id="jsonOutput"></p>
+  </div>
+
+  <script>
+    // ===== LOCAL STORAGE =====
+    function saveLocal() {
+      const name = document.getElementById("localInput").value;
+      localStorage.setItem("username", name);
+      alert("Saved to Local Storage!");
+    }
+
+    function loadLocal() {
+      const storedName = localStorage.getItem("username");
+      document.getElementById("output").textContent = storedName
+        ? `LocalStorage Data: ${storedName}`
+        : "No data found in Local Storage.";
+    }
+
+    function clearLocal() {
+      localStorage.removeItem("username");
+      document.getElementById("output").textContent = "";
+      alert("Local Storage cleared!");
+    }
+
+    // ===== SESSION STORAGE =====
+    function saveSession() {
+      const data = document.getElementById("sessionInput").value;
+      sessionStorage.setItem("sessionInfo", data);
+      alert("Saved to Session Storage!");
+    }
+
+    function loadSession() {
+      const storedData = sessionStorage.getItem("sessionInfo");
+      document.getElementById("sessionOutput").textContent = storedData
+        ? `Session data: ${storedData}`
+        : "No data found in Session Storage.";
+    }
+
+    function clearSession() {
+      sessionStorage.removeItem("sessionInfo");
+      document.getElementById("sessionOutput").textContent = "";
+      alert("Session Storage cleared!");
+    }
+
+    // ===== COOKIES =====
+    function setCookie() {
+      const name = document.getElementById("cookieName").value;
+      const value = document.getElementById("cookieValue").value;
+      const days = document.getElementById("cookieDays").value || 1;
+
+      const d = new Date();
+      d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
+      const expires = "expires=" + d.toUTCString();
+
+      document.cookie = `${encodeURIComponent(name)}=${encodeURIComponent(value)}; ${expires}; path=/`;
+
+      document.getElementById("cookieOutput").textContent = `Cookie '${name}' set successfully!`;
+    }
+
+    function getCookieValue() {
+      const name = encodeURIComponent(document.getElementById("cookieName").value) + "=";
+      const decodedCookie = decodeURIComponent(document.cookie);
+      const cookies = decodedCookie.split(';');
+
+      for (let c of cookies) {
+        c = c.trim();
+        if (c.indexOf(name) === 0) {
+          document.getElementById("cookieOutput").textContent =
+            `Cookie value: ${c.substring(name.length, c.length)}`;
+          return;
+        }
+      }
+      document.getElementById("cookieOutput").textContent = "Cookie not found!";
+    }
+
+    function deleteCookie() {
+      const name = document.getElementById("cookieName").value;
+      document.cookie = `${encodeURIComponent(name)}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+      document.getElementById("cookieOutput").textContent = `Cookie '${name}' deleted!`;
+    }
+
+    // ===== JSON EXAMPLE =====
+    // local storage only support the Strings as input to use other value we use JSON
+    function saveJSON() {
+      const friends = ["Raj", "Shrivastav", "Aman"];
+      localStorage.setItem("friendsList", JSON.stringify(friends));
+      alert("JSON array saved to Local Storage!");
+    }
+
+    function loadJSON() {
+      const stored = localStorage.getItem("friendsList");
+      if (stored) {
+        const arr = JSON.parse(stored);
+        document.getElementById("jsonOutput").textContent = "Friends: " + arr.join(", ");
+      } else {
+        document.getElementById("jsonOutput").textContent = "No JSON data found!";
+      }
+    }
+
+    function clearJSON() {
+      localStorage.removeItem("friendsList");
+      document.getElementById("jsonOutput").textContent = "";
+      alert("JSON data cleared!");
+    }
+  </script>
+</body>
+</html>
