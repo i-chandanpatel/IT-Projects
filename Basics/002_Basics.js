@@ -1,11 +1,76 @@
-// let: It's block scoped
-// var: It's funtion scoped
-// Primitive Data Types:They are immutable, if value changed they created at a new memory address. They follow copy by value. i.e let a=1; let b=a; b=2; even than a will be 1
-var a=1;
-var b="a10.5";  //String
-var bool=true;
-var c;  //Undefined: Absence of value
-var d=null; //NULL: Explicitely define absence of value but its type of "null" is "object"
+// -----------------------------
+// Variables, scope & primitives
+// -----------------------------
+
+// let -> block-scoped (lives inside {})
+// var -> function-scoped (or global if declared outside any function)
+// const -> block-scoped and cannot be reassigned (use when value shouldn't change)
+
+var a = 1;                 // Number primitive
+var b = "a10.5";           // String primitive (starts with 'a' then digits)
+var bool = true;           // Boolean primitive
+var c;                     // undefined -> declared but no value (absence of value)
+var d = null;              // null -> intentionally empty value
+
+// -----------------------------
+// Important clarifications
+// -----------------------------
+
+// 1) Primitives are immutable:
+//    When you 'change' a primitive, you actually create a new value.
+//    Example (copy-by-value):
+let p1 = 1;
+let p2 = p1;   // p2 gets a COPY of value 1
+p2 = 2;        // changing p2 does NOT affect p1
+// p1 === 1, p2 === 2
+
+// 2) typeof null === "object" is a historical JS quirk/bug.
+//    So even though null means "no value", typeof shows "object".
+console.log('typeof d (null) ->', typeof d); // expected: "object"  (note: this is a legacy JS quirk)
+
+// 3) undefined vs null:
+//    - undefined: variable declared but not assigned
+//    - null: explicitly assigned to mean "no value"
+console.log('c is', c);            // expected: undefined
+console.log('d is', d);            // expected: null
+
+// 4) Prefer const/let for modern code; var exists for legacy reasons.
+//    Example:
+const fixed = 10;   // cannot be reassigned
+let changing = 5;   // can be reassigned
+
+// -----------------------------
+// Quick runtime checks / hints
+// -----------------------------
+
+console.log('\n--- Types & values ---');
+console.log('a (value) ->', a);                      // 1
+console.log('typeof a ->', typeof a);                // "number"
+console.log('b (value) ->', b);                      // "a10.5"
+console.log('typeof b ->', typeof b);                // "string"
+console.log('bool ->', bool, ', typeof ->', typeof bool); // true, "boolean"
+
+// show that primitives are copied by value:
+let orig = 1;
+let copy = orig;
+copy = 99;
+console.log('\nprimitive copy example: orig =', orig, ', copy =', copy); // 1, 99
+
+// reminder: you can reassign var-declared variables (they're not block-scoped)
+if (true) {
+  var varInside = 'i am var';
+  let letInside = 'i am let';
+}
+// varInside exists here:
+console.log('\nvarInside ->', varInside);      // "i am var"
+// letInside would throw if we tried to access it here (block-scoped)
+
+// -----------------------------
+// Small note on types you might meet
+// -----------------------------
+// BigInt: for very large integers, e.g. 9007199254740991n
+// Symbol: unique identifier: Symbol('id')
+// (Not used above but useful to know when reading other code.)
 
 
 //String to Number
