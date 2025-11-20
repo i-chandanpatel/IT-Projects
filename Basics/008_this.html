@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>this Keyword</title>
+</head>
+<body style="background-color: black; color: aliceblue;">
+    <h1>Hello</h1>
+
+    <script>
+        // 🌐 Global context: 'this' refers to the Window object
+        console.log(this);
+
+        // 🔧 Regular function: 'this' still refers to the Window object
+        function a() {
+            console.log(this);
+        }
+        a();
+
+        // 🧍 Object method (non-arrow): 'this' refers to the object itself
+        let obj = {
+            name: "Denver",
+            sayName: function () {
+                console.log(this.name); // 'this' refers to obj
+            }
+        };
+
+        // 🏹 Arrow function inside object: 'this' refers to the outer (global) context, i.e., Window
+        let objA = {
+            name: "Denver",
+            sayName: () => {
+                console.log(this); // 'this' refers to Window
+            }
+        };
+
+        // 🔁 Nested regular function inside method: 'this' refers to Window unless explicitly bound
+        let obj1 = {
+            name: "Denver",
+            sayName: function () {
+                function a() {
+                    console.log(this); // 'this' refers to Window
+                }
+                a();
+            }
+        };
+
+        // ✅ Nested arrow function inside method: 'this' inherits from enclosing context (obj2)
+        let obj2 = {
+            name: "Denver",
+            sayName: function () {
+                let a = () => {
+                    console.log(this); // 'this' refers to obj2
+                };
+                a();
+            }
+        };
+
+        // 🖱️ Event handler: 'this' refers to the element the handler is attached to
+        document.querySelector("h1").addEventListener("click", function () {
+            console.log(this); // 'this' refers to <h1> element
+        });
+
+        // 📞 Using call, apply, and bind to control 'this'
+
+        let person = {
+            name: "Raj"
+        };
+
+        // A standalone function
+        function showDetails(a, b, c) {
+            console.log(this.name, a, b, c);
+        }
+
+        // 🔹 call(): invokes the function immediately, passing arguments individually
+        showDetails.call(person, 1, 2, 3); // Output: Raj 1 2 3
+
+        // 🔹 apply(): invokes the function immediately, passing arguments as an array
+        showDetails.apply(person, [4, 5, 6]); // Output: Raj 4 5 6
+
+        // 🔹 bind(): returns a new function with 'this' bound, but does NOT call it immediately
+        let boundFunc = showDetails.bind(person, 7, 8, 9);
+        boundFunc(); // Output: Raj 7 8 9
+    </script>
+</body>
+</html>
