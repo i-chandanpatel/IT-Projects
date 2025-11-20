@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Manager</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+
+<body class="bg-light">
+    <div class="container py-5">
+        <h1 class="text-center mb-4">User Manager</h1>
+
+        <!-- User Form -->
+        <form class="mb-5">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" id="name" class="form-control" required />
+                </div>
+                <div class="col-md-6">
+                    <label for="role" class="form-label">Role</label>
+                    <input type="text" id="role" class="form-control" required />
+                </div>
+                <div class="col-md-12">
+                    <label for="bio" class="form-label">Bio</label>
+                    <textarea id="bio" class="form-control" rows="3" required></textarea>
+                </div>
+                <div class="col-md-12">
+                    <label for="photo" class="form-label">Photo URL</label>
+                    <input type="url" id="photo" class="form-control" required />
+                </div>
+                <div class="col-12 text-center">
+                    <button type="submit" class="btn btn-primary mt-3">Add User</button>
+                </div>
+            </div>
+        </form>
+
+        <!-- User Cards -->
+        <div class="row users g-4">
+            <!-- Cards will be injected here -->
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        const form = document.querySelector("form");
+        const name = document.querySelector("#name");
+        const role = document.querySelector("#role");
+        const bio = document.querySelector("#bio");
+        const photo = document.querySelector("#photo");
+
+        const userManager = {
+            users: [],
+
+            init: function () {
+                form.addEventListener("submit", this.submitForm.bind(this));
+            },
+
+            submitForm: function (e) {
+                e.preventDefault();
+                this.addUser();
+            },
+
+            addUser: function () {
+                this.users.push({
+                    username: name.value,
+                    role: role.value,
+                    bio: bio.value,
+                    photo: photo.value
+                });
+                form.reset();
+                this.renderUi();
+            },
+
+            removeUser: function (index) {
+                this.users.splice(index, 1);
+                this.renderUi();
+            },
+
+            renderUi: function () {
+                const userContainer = document.querySelector(".users");
+                userContainer.innerHTML = "";
+
+                this.users.forEach((user, index) => {
+                    const cardCol = document.createElement("div");
+                    cardCol.className = "col-md-4";
+
+                    const card = document.createElement("div");
+                    card.className = "card h-100 text-center shadow";
+
+                    const img = document.createElement("img");
+                    img.className = "card-img-top rounded-circle mx-auto mt-4";
+                    img.style.width = "120px";
+                    img.style.height = "120px";
+                    img.src = user.photo;
+                    img.alt = "User Photo";
+                    card.appendChild(img);
+
+                    const cardBody = document.createElement("div");
+                    cardBody.className = "card-body";
+
+                    const nameEl = document.createElement("h5");
+                    nameEl.className = "card-title";
+                    nameEl.textContent = user.username;
+                    cardBody.appendChild(nameEl);
+
+                    const roleEl = document.createElement("p");
+                    roleEl.className = "text-primary fw-semibold";
+                    roleEl.textContent = user.role;
+                    cardBody.appendChild(roleEl);
+
+                    const desc = document.createElement("p");
+                    desc.className = "card-text";
+                    desc.textContent = user.bio;
+                    cardBody.appendChild(desc);
+
+                    const deleteBtn = document.createElement("button");
+                    deleteBtn.className = "btn btn-danger mt-3";
+                    deleteBtn.textContent = "Delete";
+                    deleteBtn.addEventListener("click", () => this.removeUser(index));
+                    cardBody.appendChild(deleteBtn);
+
+                    card.appendChild(cardBody);
+                    cardCol.appendChild(card);
+                    userContainer.appendChild(cardCol);
+                });
+            }
+        };
+
+        userManager.init();
+    </script>
+</body>
+
+</html>
