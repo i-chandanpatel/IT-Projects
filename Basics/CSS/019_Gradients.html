@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CSS Gradient Playground</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 20px;
+      background: #111827;
+      color: #e5e7eb;
+    }
+
+    h1, h2, h3 {
+      margin: 0 0 10px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    p {
+      margin: 4px 0 14px;
+      font-size: 0.9rem;
+      color: #d1d5db;
+    }
+
+    .section {
+      margin-bottom: 40px;
+      padding: 16px;
+      border-radius: 12px;
+      background: rgba(31, 41, 55, 0.9);
+      border: 1px solid rgba(75, 85, 99, 0.7);
+    }
+
+    .demo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      background: #020617;
+      border-radius: 12px;
+      padding: 10px 10px 14px;
+      border: 1px solid #1f2937;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #9ca3af;
+    }
+
+    .code {
+      font-family: "JetBrains Mono", "Fira Code", monospace;
+      font-size: 0.75rem;
+      background: #020617;
+      padding: 6px 8px;
+      border-radius: 8px;
+      border: 1px solid #111827;
+      overflow-x: auto;
+      white-space: pre;
+    }
+
+    .box {
+      height: 120px;
+      border-radius: 8px;
+      border: 1px solid #111827;
+    }
+
+    /* Just for section titles */
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid #4b5563;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-left: 8px;
+      color: #9ca3af;
+    }
+  </style>
+</head>
+<body>
+  <h1>CSS Gradients Playground</h1>
+
+  <!-- =========================
+       LINEAR GRADIENT
+       ========================= -->
+  <section class="section">
+    <h2>Linear Gradients <span class="badge">linear-gradient()</span></h2>
+    <p>
+      Main properties to play with: <b>direction / angle</b>, <b>color stops</b>, and <b>repeating-linear-gradient()</b>.
+    </p>
+
+    <div class="demo-grid">
+      <!-- Simple left-to-right gradient -->
+      <div class="card">
+        <div class="label">To right (default smooth blend)</div>
+        <div class="box" style="
+          background: linear-gradient(to right, #3b82f6, #ec4899);
+        "></div>
+        <div class="code">
+background: linear-gradient(to right, #3b82f6, #ec4899);
+        </div>
+      </div>
+
+      <!-- Top to bottom -->
+      <div class="card">
+        <div class="label">To bottom</div>
+        <div class="box" style="
+          background: linear-gradient(to bottom, #22c55e, #0ea5e9);
+        "></div>
+        <div class="code">
+background: linear-gradient(to bottom, #22c55e, #0ea5e9);
+        </div>
+      </div>
+
+      <!-- Using angle -->
+      <div class="card">
+        <div class="label">45deg angle</div>
+        <div class="box" style="
+          background: linear-gradient(45deg, #f97316, #22c55e, #0ea5e9);
+        "></div>
+        <div class="code">
+background: linear-gradient(45deg, #f97316, #22c55e, #0ea5e9);
+        </div>
+      </div>
+
+      <!-- Color stops with positions -->
+      <div class="card">
+        <div class="label">Color stops with positions</div>
+        <div class="box" style="
+          background: linear-gradient(
+            to right,
+            #ef4444 0%,
+            #ef4444 30%,
+            #eab308 30%,
+            #eab308 70%,
+            #22c55e 70%,
+            #22c55e 100%
+          );
+        "></div>
+        <div class="code">
+background: linear-gradient(
+  to right,
+  #ef4444 0%,
+  #ef4444 30%,
+  #eab308 30%,
+  #eab308 70%,
+  #22c55e 70%,
+  #22c55e 100%
+);
+        </div>
+      </div>
+
+      <!-- Transparent stop overlay idea -->
+      <div class="card">
+        <div class="label">Overlay style using transparency</div>
+        <div class="box" style="
+          background:
+            linear-gradient(
+              to bottom,
+              rgba(15, 23, 42, 0.1),
+              rgba(15, 23, 42, 0.9)
+            ),
+            url('https://images.pexels.com/photos/2706379/pexels-photo-2706379.jpeg?auto=compress&cs=tinysrgb&w=600')
+              center/cover no-repeat;
+        "></div>
+        <div class="code">
+background:
+  linear-gradient(
+    to bottom,
+    rgba(15, 23, 42, 0.1),
+    rgba(15, 23, 42, 0.9)
+  ),
+  url("image.jpg") center/cover no-repeat;
+        </div>
+      </div>
+
+      <!-- Repeating linear gradient -->
+      <div class="card">
+        <div class="label">repeating-linear-gradient() stripes</div>
+        <div class="box" style="
+          background: repeating-linear-gradient(
+            45deg,
+            #f97316 0px,
+            #f97316 10px,
+            #111827 10px,
+            #111827 20px
+          );
+        "></div>
+        <div class="code">
+background: repeating-linear-gradient(
+  45deg,
+  #f97316 0px,
+  #f97316 10px,
+  #111827 10px,
+  #111827 20px
+);
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================
+       RADIAL GRADIENT
+       ========================= -->
+  <section class="section">
+    <h2>Radial Gradients <span class="badge">radial-gradient()</span></h2>
+    <p>
+      Main properties: <b>shape</b> (<code>circle</code> / <code>ellipse</code>), <b>size</b> (<code>closest-side</code>, <code>farthest-corner</code>, etc.), <b>position</b> (<code>at top left</code>), and <b>repeating-radial-gradient()</b>.
+    </p>
+
+    <div class="demo-grid">
+      <!-- Default radial -->
+      <div class="card">
+        <div class="label">Default ellipse at center</div>
+        <div class="box" style="
+          background: radial-gradient(#22c55e, #0f172a);
+        "></div>
+        <div class="code">
+background: radial-gradient(#22c55e, #0f172a);
+        </div>
+      </div>
+
+      <!-- Circle at center -->
+      <div class="card">
+        <div class="label">Circle at center</div>
+        <div class="box" style="
+          background: radial-gradient(circle, #f97316, #0f172a);
+        "></div>
+        <div class="code">
+background: radial-gradient(circle, #f97316, #0f172a);
+        </div>
+      </div>
+
+      <!-- Circle at top left -->
+      <div class="card">
+        <div class="label">Circle at top left</div>
+        <div class="box" style="
+          background: radial-gradient(circle at top left, #3b82f6, #0f172a);
+        "></div>
+        <div class="code">
+background: radial-gradient(circle at top left, #3b82f6, #0f172a);
+        </div>
+      </div>
+
+      <!-- closest-side -->
+      <div class="card">
+        <div class="label">closest-side (stops at nearest edge)</div>
+        <div class="box" style="
+          background: radial-gradient(
+            circle closest-side,
+            #22c55e,
+            #0f172a
+          );
+        "></div>
+        <div class="code">
+background: radial-gradient(
+  circle closest-side,
+  #22c55e,
+  #0f172a
+);
+        </div>
+      </div>
+
+      <!-- farthest-corner -->
+      <div class="card">
+        <div class="label">farthest-corner (fills box fully)</div>
+        <div class="box" style="
+          background: radial-gradient(
+            circle farthest-corner at 30% 30%,
+            #eab308,
+            #0f172a
+          );
+        "></div>
+        <div class="code">
+background: radial-gradient(
+  circle farthest-corner at 30% 30%,
+  #eab308,
+  #0f172a
+);
+        </div>
+      </div>
+
+      <!-- Multiple colors -->
+      <div class="card">
+        <div class="label">Multi-stop radial (glow effect)</div>
+        <div class="box" style="
+          background: radial-gradient(
+            circle,
+            rgba(56, 189, 248, 0.9) 0%,
+            rgba(56, 189, 248, 0.4) 30%,
+            rgba(15, 23, 42, 1) 70%
+          );
+        "></div>
+        <div class="code">
+background: radial-gradient(
+  circle,
+  rgba(56,189,248,0.9) 0%,
+  rgba(56,189,248,0.4) 30%,
+  rgba(15,23,42,1) 70%
+);
+        </div>
+      </div>
+
+      <!-- Repeating radial -->
+      <div class="card">
+        <div class="label">repeating-radial-gradient() rings</div>
+        <div class="box" style="
+          background: repeating-radial-gradient(
+            circle at center,
+            #22c55e 0,
+            #22c55e 8px,
+            #0f172a 8px,
+            #0f172a 16px
+          );
+        "></div>
+        <div class="code">
+background: repeating-radial-gradient(
+  circle at center,
+  #22c55e 0,
+  #22c55e 8px,
+  #0f172a 8px,
+  #0f172a 16px
+);
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================
+       CONIC GRADIENT
+       ========================= -->
+  <section class="section">
+    <h2>Conic Gradients <span class="badge">conic-gradient()</span></h2>
+    <p>
+      Main properties: <b>from angle</b>, <b>position (at x y)</b>, color stops, and <b>repeating-conic-gradient()</b>. Very useful for pie-chart, spinner type designs.
+    </p>
+
+    <div class="demo-grid">
+      <!-- Basic conic -->
+      <div class="card">
+        <div class="label">Basic conic (spectrum)</div>
+        <div class="box" style="
+          background: conic-gradient(
+            from 0deg,
+            #ef4444,
+            #f97316,
+            #eab308,
+            #22c55e,
+            #0ea5e9,
+            #6366f1,
+            #a855f7,
+            #ec4899,
+            #ef4444
+          );
+        "></div>
+        <div class="code">
+background: conic-gradient(
+  from 0deg,
+  #ef4444,
+  #f97316,
+  #eab308,
+  #22c55e,
+  #0ea5e9,
+  #6366f1,
+  #a855f7,
+  #ec4899,
+  #ef4444
+);
+        </div>
+      </div>
+
+      <!-- Pie chart style -->
+      <div class="card">
+        <div class="label">Pie chart style sectors</div>
+        <div class="box" style="
+          background: conic-gradient(
+            #22c55e 0deg 90deg,
+            #3b82f6 90deg 210deg,
+            #eab308 210deg 360deg
+          );
+        "></div>
+        <div class="code">
+background: conic-gradient(
+  #22c55e 0deg 90deg,
+  #3b82f6 90deg 210deg,
+  #eab308 210deg 360deg
+);
+        </div>
+      </div>
+
+      <!-- Offset origin -->
+      <div class="card">
+        <div class="label">Moved center (at top left)</div>
+        <div class="box" style="
+          background: conic-gradient(
+            from 0deg at 10% 10%,
+            #f97316,
+            #22c55e,
+            #0ea5e9,
+            #f97316
+          );
+        "></div>
+        <div class="code">
+background: conic-gradient(
+  from 0deg at 10% 10%,
+  #f97316,
+  #22c55e,
+  #0ea5e9,
+  #f97316
+);
+        </div>
+      </div>
+
+      <!-- Donut / ring effect -->
+      <div class="card">
+        <div class="label">Donut effect using mask</div>
+        <div class="box" style="
+          background:
+            radial-gradient(circle at center, #020617 40%, transparent 41%),
+            conic-gradient(
+              #22c55e 0deg 120deg,
+              #3b82f6 120deg 240deg,
+              #f97316 240deg 360deg
+            );
+          background-blend-mode: normal;
+        "></div>
+        <div class="code">
+background:
+  radial-gradient(circle at center, #020617 40%, transparent 41%),
+  conic-gradient(
+    #22c55e 0deg 120deg,
+    #3b82f6 120deg 240deg,
+    #f97316 240deg 360deg
+  );
+        </div>
+      </div>
+
+      <!-- Repeating conic -->
+      <div class="card">
+        <div class="label">repeating-conic-gradient() wedges</div>
+        <div class="box" style="
+          background: repeating-conic-gradient(
+            from 0deg,
+            #f97316 0deg 10deg,
+            #111827 10deg 20deg
+          );
+        "></div>
+        <div class="code">
+background: repeating-conic-gradient(
+  from 0deg,
+  #f97316 0deg 10deg,
+  #111827 10deg 20deg
+);
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================
+       QUICK NOTES
+       ========================= -->
+  <section class="section">
+    <h3>Quick Summary of Properties You Can Play With</h3>
+    <p>
+      <b>linear-gradient()</b>: <code>angle | to direction</code>, color stops with optional <code>%</code> or <code>px</code> positions, <code>repeating-linear-gradient()</code>.
+    </p>
+    <p>
+      <b>radial-gradient()</b>: <code>circle | ellipse</code>, size (<code>closest-side</code>, <code>closest-corner</code>, <code>farthest-side</code>, <code>farthest-corner</code>), position (<code>at x y</code>), <code>repeating-radial-gradient()</code>.
+    </p>
+    <p>
+      <b>conic-gradient()</b>: <code>from &lt;angle&gt;</code>, <code>at x y</code> to move the center, angle ranges for each color stop, <code>repeating-conic-gradient()</code>.
+    </p>
+  </section>
+</body>
+</html>
