@@ -73,6 +73,35 @@ console.log('\nvarInside ->', varInside);      // "i am var"
 // (Not used above but useful to know when reading other code.)
 
 
+// Number
+let b = 1.373;
+
+// toFixed(n)
+// Rounds the number and keeps exactly 'n' digits after the decimal point.
+let fixedValue = b.toFixed(2);   // "1.37" (rounded, string)
+console.log("toFixed(2):", fixedValue);
+
+// Convert back to number if needed for calculation
+let fixedNumber = Number(fixedValue);
+console.log("toFixed as number:", fixedNumber);
+
+// toPrecision(n)
+// Formats the number to 'n' TOTAL significant digits
+let precisionValue = b.toPrecision(3); // "1.37" (string)
+console.log("toPrecision(3):", precisionValue);
+
+// toString()
+// Converts number into string without changing value
+let stringValue = b.toString(); // "1.373"
+console.log("toString():", stringValue);
+
+// toString can also convert to other number systems
+let num = 10;
+console.log("Binary:", num.toString(2));   // "1010"
+console.log("Octal:", num.toString(8));    // "12"
+console.log("Hex:", num.toString(16));     // "a"
+
+
 //String to Number
 console.log(typeof +b);
 console.log(typeof Number(b));
