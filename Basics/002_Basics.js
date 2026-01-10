@@ -591,3 +591,5 @@ var c={...b};   //The non nested value will have different copies but the nested
 var str=JSON.stringify(b);
 var newObj=JSON.parse(str);
 
+//OR
+var c=structuredClone(b);
