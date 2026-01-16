@@ -593,3 +593,38 @@ var newObj=JSON.parse(str);
 
 //OR
 var c=structuredClone(b);
+
+// Limitations of `structuredClone()`
+// It is designed to clone data, not code or system resources. It can't clone: 
+// Functions: It will throw a `DataCloneError`. Functions have a "scope" and are not considered simple data.
+// DOM Nodes: It will throw an error. You can't clone a piece of a webpage this way.
+// Class Instances (Prototypes): It will discard the object's prototype chain. The clone will be a plain object with all the same data properties, but it will no longer be an "instance of" your custom class.
+// Error objects
+
+// const original = {
+//   name: "Alice",
+//   sayHi: function() { console.log("Hi"); }
+// };
+
+// try {
+//   const clone = structuredClone(original);
+// } catch (error) {
+//   console.error(error.name); // "DataCloneError"
+//   console.error(error.message); // "() => { console.log("Hi"); } could not be cloned."
+// }
+
+// Solution of the above problem. It's old method but can be used
+// // You would first need to install lodash: npm install lodash
+// import _ from 'lodash';
+
+// const original = {
+//   name: "Alice",
+//   sayHi: function() { console.log("Hi"); }
+// };
+
+// const lodashClone = _.cloneDeep(original);
+
+// // It even clones the function!
+// lodashClone.sayHi(); // "Hi"
+// console.log(original.sayHi === lodashClone.sayHi); // false (it's a new function reference)
+
