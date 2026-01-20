@@ -22,59 +22,100 @@
     </ul>
     <p id="1" class="a">Paragraph</p>
 </body>
+
 <script>
-    var a =document.getElementById(1);
+    // Selecting element by id (id is "1")
+    var a = document.getElementById(1);
+
+    // childNodes → NodeList (includes elements, text nodes, comments, whitespace)
     console.log(document.body.childNodes);
+
+    // children → HTMLCollection (only element nodes)
     console.log(document.body.children);
+
+    // firstChild → may be a text node (whitespace/newline)
     console.log(document.body.firstChild);
+
+    // firstElementChild → always an element
     console.log(document.body.firstElementChild);
+
+    // nextSibling → next node (could be text node)
     console.log(document.body.firstElementChild.nextSibling);
+
+    // nextElementSibling → next element only
     console.log(document.body.firstChild.nextElementSibling);
+
+    // lastChild → may be text node
     console.log(document.body.lastChild);
+
+    // previousElementSibling → previous element only
     console.log(document.body.lastElementChild.previousElementSibling);
+
+    // previousSibling → previous node (could be text)
     console.log(document.body.lastChild.previousSibling);
 
-    a=document.getElementsByClassName("a")  //Gives array like structure
+    // getElementsByClassName returns an HTMLCollection (live, element-only, array-like)
+    a = document.getElementsByClassName("a");
     console.log(...a);
 
-    //Manipulation can be done by these
+    // Manipulation using HTMLCollection
     for (const node of a) {
-        console.log(node.innerHTML);
-        console.log(node.innerText);
-        console.log(node.textContent);
+        console.log(node.innerHTML);    // includes HTML tags
+        console.log(node.innerText);    // visible text only
+        console.log(node.textContent);  // all text including hidden
     }
-    console.log(document.getElementsByTagName("p"));    //Gives array like structure
-    // console.log(document.querySelector("#1"));       //This is wrong
+
+    // getElementsByTagName returns an HTMLCollection
+    console.log(document.getElementsByTagName("p"));
+
+    // querySelector with numeric id needs attribute selector
+    // console.log(document.querySelector("#1")); // invalid CSS selector
     console.log(document.querySelector('[id="1"]'));
+
+    // querySelector returns the FIRST matching element
     console.log(document.querySelector(".a"));
-    console.log(document.querySelector("li"));  //Selects first "li" from the body
-    console.log(document.querySelectorAll("li"));   //Gives array like structure(NodeList)
+    console.log(document.querySelector("li"));
 
-    // Changing attribute of a tag
-    a=document.getElementsByTagName("a")[0];    //Always have to specify which value we want to select
-    a.href="https://google.com";
+    // querySelectorAll returns a NodeList (static, array-like)
+    console.log(document.querySelectorAll("li"));
+
+    // Selecting anchor tag (HTMLCollection → index required)
+    a = document.getElementsByTagName("a")[0];
+    a.href = "https://google.com";
 
     console.log(a.getAttribute("href"));
+
     a.setAttribute("href","https://youtube.com");
     console.log(a.getAttribute("href"));
     
-    a.removeAttribute("href");      //anchor tag now don't have the href attribute
+    // Removing href attribute
+    a.removeAttribute("href");
     console.log(a);
+
+    // Adding href again
     a.setAttribute("href","https://youtube.com");
     console.log(a);
 
-    var h1=document.createElement("h1");
-    h1.textContent="Dynamically Added";
-    document.body.append(h1);   //append adds it to the end, if prepend used it will added to the start
+    // Creating new element dynamically
+    var h1 = document.createElement("h1");
+    h1.textContent = "Dynamically Added";
 
-    //Changing css
-    h1.style.color="blue";
-    h1.style.backgroundColor="green"
+    // append → adds element at the end of body
+    // prepend → would add at the beginning
+    document.body.append(h1);
 
-    a=document.getElementsByClassName("a")
+    // Changing inline CSS using JS
+    h1.style.color = "blue";
+    h1.style.backgroundColor = "green";
+
+    // getElementsByClassName returns a LIVE HTMLCollection
+    a = document.getElementsByClassName("a");
     console.log(a);
+
+    // Removing class "a" from paragraph
     a[1].classList.toggle("a");
-    console.log(a);     //Now paragraph will not come because we selected using className and removed the class from it
-    
+
+    // Paragraph disappears from collection because HTMLCollection is LIVE
+    console.log(a);
 </script>
 </html>
