@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD in DOM</title>
+
+</head>
+
+<body style="background-color: black; color: whitesmoke;">
+    <h1 id="first">Hello</h1>
+
+    <ul id="list"></ul>
+
+    <ul id="list2"></ul>
+</body>
+<script>
+    const newEle = document.createElement("h2");
+    newEle.textContent = "I'm a coder";
+    newEle.id = "Coder";
+
+    const element = document.getElementById("first");
+
+    element.after(newEle);
+    // element.before(newEle);
+
+
+    // Adding class using className but will replace(Override) the previous class
+    newEle.className = "diwali";
+    // newEle.className = "holi";             //This will override the diwali class
+    newEle.className += " holi";    //This will append not override
+
+
+    // Adding class using classList.add() will not replace the older class
+    newEle.classList.add("one");
+    newEle.classList.add("two");
+
+    console.log(newEle.getAttribute("class"));
+
+
+
+    const list = document.getElementById("list");
+
+    const liEle1 = document.createElement("li");
+    const liEle2 = document.createElement("li");
+    const liEle3 = document.createElement("li");
+    const liEle4 = document.createElement("li");
+
+    liEle1.textContent = "1";
+    liEle2.textContent = "2";
+    liEle3.textContent = "3";
+    liEle4.textContent = "4";
+
+
+    list.append(liEle1, liEle2);
+    list.append(liEle3)
+
+
+    // Inserting in between
+    list.children[1].after(liEle4);
+
+
+
+
+    // Adding multiple elements on the UI
+    const list2 = document.getElementById("list2");
+
+    const arr = [1, 2, 3, 4];
+
+    // Bad method It increases rendering process as each time a new element is added
+    // for(let num of arr){
+    //       const lists= document.createElement("li");
+    //       lists.textContent=num;
+    //       list2.append(lists);
+    // }
+
+    // Good practice using Fragments
+    const fragment = document.createDocumentFragment();
+
+    for (let num of arr) {
+        const li = document.createElement("li"); // create <li>
+        li.textContent = num;                     // set text
+        fragment.appendChild(li);                 // append <li> to fragment
+    }
+
+    list2.appendChild(fragment); // append all <li> elements to <ul> at once
+
+    // Shortcuts will create problem
+    // for (let num of arr) {
+    //     // 1️⃣ Creates a new <li> element in memory
+    //     //    ✅ This part is correct
+    //     // 2️⃣ Sets the textContent of the <li> to 'num'
+    //     //    ⚠️ PROBLEM: textContent = num returns the **string** assigned, NOT the <li> element
+    //     // 3️⃣ list2.append(...) then tries to append that returned value
+    //     //    ⚠️ PROBLEM: it appends a **string** directly into the <ul>, not a <li> element
+    //     // Result: The <ul> will contain plain text "1", "2", "3", "4" instead of proper <li> elements
+    //     list2.append( (document.createElement("li")).textContent = num );
+    // }
+
+    // Fragments will also face the same problem as above
+    // for(let num of arr){
+    //    fragment.append( (document.createElement("li")).textContent=num );
+    // }
+    // list2.append(fragment);
+</script>
+
+</html>
