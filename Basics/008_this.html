@@ -72,10 +72,11 @@
             console.log(this.name, a, b, c);
         }
 
-        // 🔹 call(): invokes the function immediately, passing arguments individually
+        // 🔹 call(): invokes the function immediately and we can change the value of "this" keyword.
+        //  i.e We have passed the person object, than "this" will refer to the person object
         showDetails.call(person, 1, 2, 3); // Output: Raj 1 2 3
 
-        // 🔹 apply(): invokes the function immediately, passing arguments as an array
+        // 🔹 apply(): does the same as call. Diff: passing arguments as an array if more than one
         showDetails.apply(person, [4, 5, 6]); // Output: Raj 4 5 6
 
         // 🔹 bind(): returns a new function with 'this' bound, but does NOT call it immediately
