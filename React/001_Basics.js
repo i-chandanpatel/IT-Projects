@@ -291,3 +291,109 @@ Important:
 
 ====================================================================
 */
+
+/*
+====================================================================
+🔟 HOW REACT STATE UPDATES ACTUALLY WORK (VERY IMPORTANT)
+
+React DOES NOT update state immediately.
+
+When you call:
+setCount(1);
+
+React:
+✔ Schedules the update
+✔ Batches multiple updates together
+✔ Re-renders after processing all updates
+
+------------------------------------------------------------
+🔁 BATCHING EXAMPLE
+
+const increment = () => {
+  setCount(count + 1);
+  setCount(count + 1);
+  setCount(count + 1);
+};
+
+If count = 0:
+
+All three lines read:
+0 + 1
+
+So React receives:
+setCount(1)
+setCount(1)
+setCount(1)
+
+Final result = 1 (NOT 3)
+
+Reason:
+State inside the function does NOT change instantly.
+It keeps the old value until React finishes processing.
+
+This is called:
+⚠️ Stale State (Old value being reused)
+
+------------------------------------------------------------
+✅ SOLUTION: FUNCTIONAL UPDATE
+
+const increment = () => {
+  setCount((prev) => prev + 1);
+  setCount(prev => prev + 1);
+  setCount(prev => prev + 1);
+};
+
+Now React processes like this:
+
+Start = 0
+
+1st update:
+prev = 0 → return 1
+
+2nd update:
+prev = 1 → return 2
+
+3rd update:
+prev = 2 → return 3
+
+Final result = 3
+
+------------------------------------------------------------
+🧠 WHAT IS "prev"?
+
+prev is simply the latest state value
+provided by React at update time.
+
+It is NOT a special keyword.
+It is just a parameter name.
+
+You could write:
+
+setCount(currentValue => currentValue + 1);
+
+------------------------------------------------------------
+📌 WHEN TO USE FUNCTIONAL UPDATE?
+
+Whenever new state depends on old state:
+
+✔ Counters
+✔ Toggle (true/false)
+✔ Updating arrays
+✔ Updating objects
+
+Example (Array):
+
+setItems(prev => [...prev, newItem]);
+
+Example (Toggle):
+
+setOpen(prev => !prev);
+
+------------------------------------------------------------
+🔥 KEY RULE:
+
+If your next state depends on previous state →
+ALWAYS use functional update.
+
+====================================================================
+*/
