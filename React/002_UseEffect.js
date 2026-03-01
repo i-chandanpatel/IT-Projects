@@ -1,7 +1,6 @@
 /*
 ====================================================================
 REACT useEffect + LIST RENDERING EXPLANATION FILE
-====================================================================
 
 This file explains:
 1️⃣ Problem with calling API outside useEffect
@@ -26,22 +25,35 @@ This file explains:
 1️⃣ PROBLEM WITH COMMENTED CODE (Calling API outside useEffect)
 
 You previously had:
-
-async function GitHubProfile() {
-  const response = await fetch("https://api.github.com/users");
-  const data = await response.json();
-  setUsers(data);
+*/
+function App1(){
+  const [users,setUsers] = useState([]);
+  
+  async function GitHubProfile() {
+    const response = await fetch("https://api.github.com/users");
+    const data = await response.json();
+    setUsers(data);
+  }
+  GitHubProfile();  // ❌ Called directly inside component
+  
+  return (
+  <>
+    <h3>Github Users</h3>
+    <div style={{display:flex, justifyContent:"center", alignItem:"center", flexWrap:"wrap", gap:"10px"}}>
+      {
+        users.map(user=>()
+          <img src={user.avatar_url} height={"100px"} width={"100px"} />
+        )
+      }
+    </div>
+  </> )
 }
 
-GitHubProfile();  // ❌ Called directly inside component
 
---------------------------------------------------------------------
-
+/*
 🚨 WHY IS THIS WRONG?
 
 Because React components re-run every time state changes.
-
-What happens step-by-step:
 1. Component renders
 2. GitHubProfile() runs
 3. setUsers(data) updates state
@@ -54,13 +66,9 @@ This causes:
 ❌ Performance issues
 ❌ Possible crash
 
---------------------------------------------------------------------
-
 🔥 IMPORTANT RULES:
 1. Never call state-updating functions directly inside the component body.
 2. Side effects (API calls, timers, subscriptions) must go inside useEffect.
-
-====================================================================
 */
 
 
@@ -73,7 +81,6 @@ useEffect(() => {
    // side effect code
 }, [dependencies]);
 
---------------------------------------------------------------------
 
 What is a "side effect"?
 Anything that:
@@ -107,42 +114,24 @@ useEffect(() => {
    GitHubProfile();
 }, []);
 
-The second argument is called:
-👉 Dependency Array
-
---------------------------------------------------------------------
+The second argument, [] is called "Dependency Array"
 
 WHAT DOES [] MEAN?
-
-Empty array means:
 ✔ Run only ONCE
 ✔ Run after first render
 ✔ Similar to componentDidMount (class components)
 
---------------------------------------------------------------------
-
 Different Cases:
-
-1️⃣ No dependency array:
-Runs after EVERY render.
-
-2️⃣ With empty array []:
-Runs only once after initial render.
-
-3️⃣ With dependencies:
-Runs on first render and whenever dependencies change
-
---------------------------------------------------------------------
+1️⃣ No dependency array: Runs after EVERY render.
+2️⃣ With empty array []: Runs only once after initial render.
+3️⃣ With dependencies: Runs on first render and whenever dependencies change
 
 USE CASE FOR []:
-
 ✔ API calls (fetch data once)
 ✔ Initial setup
 ✔ Loading initial data
 
-In your GitHub example:
-We fetch users only once when page loads.
-
+In our GitHub example: We fetch users only once when page loads.
 ====================================================================
 */
 
