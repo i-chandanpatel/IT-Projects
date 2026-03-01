@@ -22,10 +22,10 @@ This file explains:
 
 /*
 ====================================================================
-1️⃣ PROBLEM WITH COMMENTED CODE (Calling API outside useEffect)
-
-You previously had:
+1️⃣ Problem with below code (Calling API outside useEffect)
 */
+import { useState } from "react";
+
 function App1(){
   const [users,setUsers] = useState([]);
   
@@ -71,6 +71,41 @@ This causes:
 2. Side effects (API calls, timers, subscriptions) must go inside useEffect.
 */
 
+
+// useEffect
+import { useState, useEffect } from "react";
+
+function App2() {
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    async function GitHubProfile() {
+      try {
+        const response = await fetch("https://api.github.com/users");
+        const data = await response.json();
+        setUsers(data);
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      }
+    }
+
+    GitHubProfile();
+  }, []); // Empty dependency array = run only once on mount
+
+  return (
+    <>
+      <h3>Github Users</h3>
+      <div
+        style={{display: "flex", justifyContent: "center", alignItems: "center", flexWrap: "wrap", gap: "10px",}}>
+        {
+          users.map((user) => (
+            <img key={user.id} src={user.avatar_url} height="100px" width="100px" alt={user.login}
+          />
+        ))}
+      </div>
+    </>
+  );
+}
 
 /*
 ====================================================================
