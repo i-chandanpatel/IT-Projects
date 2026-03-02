@@ -1,36 +1,24 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 function App1(){
   const [users,setUsers] = useState([]);
-
-//  async function GitHubProfile() {
-//    const response = await fetch("https://api.github.com/users");
-//    const data = await response.json();
-//    setUsers(data);
-//  }
-//  GitHubProfile();  // ❌ Called directly inside component
-
-    useEffect(() => {
-      async function GitHubProfile() {
-        try {
-          const response = await fetch("https://api.github.com/users");
-          const data = await response.json();
-          setUsers(data);
-        } catch (error) {
-          console.error("Error fetching users:", error);
-        }
-      }
-      GitHubProfile();
-    }, []); // Empty dependency array = run only once on mount
   
+  async function GitHubProfile() {
+    const response = await fetch("https://api.github.com/users");
+    const data = await response.json();
+    setUsers(data);
+  }
+
+  GitHubProfile();  // ❌ Called directly inside component (during render phase)
+
   return (
   <>
     <h3>Github Users</h3>
-    <div style={{display:flex, justifyContent:"center", alignItem:"center", flexWrap:"wrap", gap:"10px"}}>
+    <div style={{display:"flex", justifyContent:"center", alignItem:"center", flexWrap:"wrap", gap:"10px"}}>
       {
-        users.map(user=>()
+        users.map(user=>(
           <img key={user.login} src={user.avatar_url} height={"100px"} width={"100px"} />
-        )
+        ))
       }
     </div>
   </> )
@@ -38,36 +26,98 @@ function App1(){
 
 
 /*
-1️⃣ Problem with below commented code (Calling API outside useEffect)
+====================================================================
+🚨 PROBLEM: Calling API directly inside the component body
+====================================================================
 
-function App1(){
-  const [users,setUsers] = useState([]);
-//  async function GitHubProfile() {
-//    const response = await fetch("https://api.github.com/users");
-//    const data = await response.json();
-//    setUsers(data);
-//  }
-//  GitHubProfile();  // ❌ Called directly inside component
+React components are pure functions of state and props.
 
-    useEffect(() => {
-      ....
-    }, []);
-}
+That means:
+Component runs → returns JSX → done.
 
-React components re-run every time state changes.
-1. Component renders
-2. GitHubProfile() runs
-3. setUsers(data) updates state
-4. State update causes re-render
-5. Re-render calls GitHubProfile() again
-6. Infinite loop
+But here we are doing something extra:
+We are performing a SIDE EFFECT during rendering.
 
-This causes:
-Continuous API calls, Performance issues, Possible crash
+What is a side effect?
+Anything that:
+- Fetches data
+- Updates state
+- Uses timers
+- Talks to external systems
 
-🔥 IMPORTANT RULES:
-1. Never call state-updating functions directly inside the component body.
-2. Side effects (API calls, timers, subscriptions) must go inside useEffect.
+These must NOT run during render.
+
+--------------------------------------------------------------------
+
+🔥 What actually happens step-by-step:
+
+1️⃣ Component renders for the first time
+2️⃣ GitHubProfile() runs immediately
+3️⃣ setUsers(data) updates state
+4️⃣ State update triggers re-render
+5️⃣ Component runs again
+6️⃣ GitHubProfile() runs again
+7️⃣ setUsers() runs again
+8️⃣ Loop continues...
+
+This creates:
+❌ Continuous API calls
+❌ Performance issues
+❌ Possible browser crash
+❌ API rate limiting from GitHub
+
+--------------------------------------------------------------------
+
+🧠 Important Concept:
+
+Render Phase = Calculation of UI  
+It should be PURE (no side effects)
+
+If state is updated during render,
+React will re-run the component again.
+
+React is not broken here.
+It is doing exactly what it is designed to do.
+
+We created a feedback loop ourselves.
+
+--------------------------------------------------------------------
+
+⚠️ Core Rule:
+
+Never call state-updating functions
+directly inside the component body.
+
+Side effects must be separated
+from rendering logic.
+
+This is why useEffect exists.
+It allows us to run side effects
+AFTER rendering — not DURING rendering.
+
+====================================================================
+In the next file we will move this logic
+into useEffect and solve the problem properly.
+====================================================================
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ====================================================================
