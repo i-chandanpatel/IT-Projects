@@ -1,7 +1,3 @@
-/*
-====================================================================
-1️⃣ Problem with below commented code (Calling API outside useEffect)
-*/
 import { useState, useEffect } from "react";
 
 function App1(){
@@ -26,6 +22,7 @@ function App1(){
       }
       GitHubProfile();
     }, []); // Empty dependency array = run only once on mount
+  
   return (
   <>
     <h3>Github Users</h3>
@@ -41,15 +38,29 @@ function App1(){
 
 
 /*
-🚨 WHY IS THE COMMENTED CODE WRONG?
+1️⃣ Problem with below commented code (Calling API outside useEffect)
 
-Because React components re-run every time state changes.
+function App1(){
+  const [users,setUsers] = useState([]);
+//  async function GitHubProfile() {
+//    const response = await fetch("https://api.github.com/users");
+//    const data = await response.json();
+//    setUsers(data);
+//  }
+//  GitHubProfile();  // ❌ Called directly inside component
+
+    useEffect(() => {
+      ....
+    }, []);
+}
+
+React components re-run every time state changes.
 1. Component renders
 2. GitHubProfile() runs
 3. setUsers(data) updates state
 4. State update causes re-render
 5. Re-render calls GitHubProfile() again
-6. Infinite loop 🔁
+6. Infinite loop
 
 This causes:
 Continuous API calls, Performance issues, Possible crash
@@ -62,11 +73,9 @@ Continuous API calls, Performance issues, Possible crash
 ====================================================================
 2️⃣ HOW useEffect WORKS
 
-Syntax:
 useEffect(() => {
    // side effect code
 }, [dependencies]);
-
 
 What is a "side effect"?
 Anything that:
@@ -94,7 +103,7 @@ useEffect(() => {
    GitHubProfile();
 }, []);
 
-The second argument, [] is called "Dependency Array"
+[] is called "Dependency Array"
 
 WHAT DOES [] MEAN?
 ✔ Run only ONCE
@@ -104,7 +113,7 @@ WHAT DOES [] MEAN?
 Different Cases:
 1️⃣ No dependency array: Runs after EVERY render.
 2️⃣ With empty array []: Runs only once after initial render.
-3️⃣ With dependencies: Runs on first render and whenever dependencies change
+3️⃣ With dependencies[a,b]: Runs on first render and whenever dependencies change
 
 USE CASE FOR []:
 ✔ API calls (fetch data once)
@@ -115,9 +124,32 @@ In our GitHub example: We fetch users only once when page loads.
 
 
 ====================================================================
-4️⃣ WHY "key" IS REQUIRED IN <img> TAG?
+DEPENDENCY ARRAY MENTAL MODEL (VERY IMPORTANT)
 
-Example:
+The dependency array controls WHEN useEffect runs.
+
+React checks: "Did any dependency value change?"
+
+If YES → run effect again
+If NO → skip effect
+
+IMPORTANT RULE: Every value used inside useEffect should be listed in dependency array.
+
+useEffect(() => {
+  console.log(count);
+}, [count]);  // count must be included
+
+WHY?
+Because useEffect "captures" values from the render in which it was created.
+
+This is called:
+👉 Closure
+
+If dependency is missing, you may get stale values (old state).
+
+
+====================================================================
+4️⃣ WHY "key" IS REQUIRED IN <img> TAG?
 
 users.map(user => (
   <img key={user.login} ... />
@@ -135,8 +167,6 @@ This process is called: Reconciliation (Virtual DOM diffing)
 
 WHAT HAPPENS WITHOUT key?
 React shows warning: "Each child in a list should have a unique key prop."
-
-Without key:
 Performance issues, Wrong DOM updates, UI bugs
 
 BEST PRACTICE:
@@ -149,10 +179,8 @@ key={user.id}  ✅ Best
 key={user.login} ✅ Good if unique
 key={index} ❌ Avoid if list changes
 
-
 key is NOT related to useEffect
 
-====================================================================
 FINAL UNDERSTANDING
 
 Your flow now works like this:
@@ -164,7 +192,6 @@ Your flow now works like this:
 6. users.map() displays images
 7. key helps React efficiently update DOM
 
-====================================================================
 HOW REACT USES "key" INTERNALLY (RECONCILIATION)
 
 When state updates, React compares:
@@ -249,7 +276,6 @@ HOW TO FIX?
 ✔ Make sure effect does not continuously update its own dependency
 ✔ Use conditional logic if needed
 
-Example:
 useEffect(() => {
   if (count < 5) {
     setCount(prev => prev + 1);
@@ -315,40 +341,7 @@ RULE: If your effect creates something, cleanup should remove it.
 
 /*
 ====================================================================
-9️⃣ DEPENDENCY ARRAY MENTAL MODEL (VERY IMPORTANT)
-====================================================================
-
-The dependency array controls WHEN useEffect runs.
-
-React checks:
-"Did any dependency value change?"
-
-If YES → run effect again
-If NO → skip effect
-
-
-IMPORTANT RULE:
-Every value used inside useEffect should be listed in dependency array.
-
-Example:
-
-useEffect(() => {
-  console.log(count);
-}, [count]);  // count must be included
-
-WHY?
-Because useEffect "captures" values from the render in which it was created.
-
-This is called:
-👉 Closure
-
-If dependency is missing, you may get stale values (old state).
-
-
-🔥 SIMPLE RULE:
-If you use something inside effect, add it to dependency array.
-====================================================================
-*/
+9️⃣ 
 
 
 /*
