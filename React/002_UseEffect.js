@@ -24,25 +24,37 @@ This file explains:
 ====================================================================
 1️⃣ Problem with below code (Calling API outside useEffect)
 */
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function App1(){
   const [users,setUsers] = useState([]);
-  
-  async function GitHubProfile() {
-    const response = await fetch("https://api.github.com/users");
-    const data = await response.json();
-    setUsers(data);
-  }
-  GitHubProfile();  // ❌ Called directly inside component
-  
+
+//  async function GitHubProfile() {
+//    const response = await fetch("https://api.github.com/users");
+//    const data = await response.json();
+//    setUsers(data);
+//  }
+//  GitHubProfile();  // ❌ Called directly inside component
+
+    useEffect(() => {
+      async function GitHubProfile() {
+        try {
+          const response = await fetch("https://api.github.com/users");
+          const data = await response.json();
+          setUsers(data);
+        } catch (error) {
+          console.error("Error fetching users:", error);
+        }
+      }
+      GitHubProfile();
+    }, []); // Empty dependency array = run only once on mount
   return (
   <>
     <h3>Github Users</h3>
     <div style={{display:flex, justifyContent:"center", alignItem:"center", flexWrap:"wrap", gap:"10px"}}>
       {
         users.map(user=>()
-          <img src={user.avatar_url} height={"100px"} width={"100px"} />
+          <img key={user.login} src={user.avatar_url} height={"100px"} width={"100px"} />
         )
       }
     </div>
@@ -51,7 +63,7 @@ function App1(){
 
 
 /*
-🚨 WHY IS THIS WRONG?
+🚨 WHY IS THE COMMENTED CODE WRONG?
 
 Because React components re-run every time state changes.
 1. Component renders
@@ -62,52 +74,13 @@ Because React components re-run every time state changes.
 6. Infinite loop 🔁
 
 This causes:
-❌ Continuous API calls
-❌ Performance issues
-❌ Possible crash
+Continuous API calls, Performance issues, Possible crash
 
 🔥 IMPORTANT RULES:
 1. Never call state-updating functions directly inside the component body.
 2. Side effects (API calls, timers, subscriptions) must go inside useEffect.
-*/
 
 
-// useEffect
-import { useState, useEffect } from "react";
-
-function App2() {
-  const [users, setUsers] = useState([]);
-
-  useEffect(() => {
-    async function GitHubProfile() {
-      try {
-        const response = await fetch("https://api.github.com/users");
-        const data = await response.json();
-        setUsers(data);
-      } catch (error) {
-        console.error("Error fetching users:", error);
-      }
-    }
-
-    GitHubProfile();
-  }, []); // Empty dependency array = run only once on mount
-
-  return (
-    <>
-      <h3>Github Users</h3>
-      <div
-        style={{display: "flex", justifyContent: "center", alignItems: "center", flexWrap: "wrap", gap: "10px",}}>
-        {
-          users.map((user) => (
-            <img key={user.id} src={user.avatar_url} height="100px" width="100px" alt={user.login}
-          />
-        ))}
-      </div>
-    </>
-  );
-}
-
-/*
 ====================================================================
 2️⃣ HOW useEffect WORKS
 
@@ -124,10 +97,8 @@ Anything that:
 ✔ Accesses DOM
 ✔ Subscribes to external services
 
---------------------------------------------------------------------
 
 HOW useEffect WORKS INTERNALLY:
-
 1. Component renders
 2. React paints UI to screen
 3. After render completes → useEffect runs
@@ -136,11 +107,7 @@ Important:
 useEffect runs AFTER rendering, not during rendering.
 This prevents infinite loops and keeps rendering pure.
 
-====================================================================
-*/
 
-
-/*
 ====================================================================
 3️⃣ WHY WE PASS EMPTY ARRAY [] ?
 
@@ -167,11 +134,8 @@ USE CASE FOR []:
 ✔ Loading initial data
 
 In our GitHub example: We fetch users only once when page loads.
-====================================================================
-*/
 
 
-/*
 ====================================================================
 4️⃣ WHY "key" IS REQUIRED IN <img> TAG?
 
@@ -180,8 +144,6 @@ Example:
 users.map(user => (
   <img key={user.login} ... />
 ))
-
---------------------------------------------------------------------
 
 WHY key IS REQUIRED?
 
@@ -194,10 +156,8 @@ When rendering lists, React needs to:
 React uses key to compare: Previous list  VS  New list
 This process is called: Reconciliation (Virtual DOM diffing)
 
---------------------------------------------------------------------
 
 WHAT HAPPENS WITHOUT key?
-
 React shows warning: 
 "Each child in a list should have a unique key prop."
 
@@ -205,8 +165,6 @@ Without key:
 ❌ Performance issues
 ❌ Wrong DOM updates
 ❌ UI bugs
-
---------------------------------------------------------------------
 
 BEST PRACTICE:
 ✔ Use unique id from data (user.id)
@@ -218,25 +176,13 @@ key={user.id}  ✅ Best
 key={user.login} ✅ Good if unique
 key={index} ❌ Avoid if list changes
 
---------------------------------------------------------------------
 
-🔥 SIMPLE SUMMARY
-
-useEffect → Controls side effects
-[] → Run effect only once
-key → Helps React track list items
 key is NOT related to useEffect
 
-====================================================================
-*/
-
-
-/*
 ====================================================================
 FINAL UNDERSTANDING
 
 Your flow now works like this:
-
 1. Component renders
 2. useEffect runs once (because [])
 3. API call fetches data
