@@ -8,6 +8,14 @@ React components must stay pure during rendering.
 Fetching data is a side effect.
 Side effects must run AFTER rendering.
 
+A side effect is anything that:
+✔ Fetches data
+✔ Uses setTimeout / setInterval
+✔ Accesses DOM directly
+✔ Subscribes to external services
+✔ Uses localStorage
+✔ Connects to APIs
+
 useEffect allows us to:
 ✔ Separate rendering logic from side effects
 ✔ Prevent infinite re-render loops
@@ -86,6 +94,7 @@ Core rule:
 Rendering must stay PURE.
 Side effects must be placed inside useEffect.
 
+useEffect gives us that separation.
 
 
 ====================================================================
@@ -100,8 +109,16 @@ Commit Phase  → Updates DOM and runs effects
 useEffect runs in the Commit Phase.
 That means it runs AFTER the UI is painted.
 
-This separation prevents render-side loops
-and keeps state updates controlled.
+This separation prevents render-side loops and keeps state updates controlled.
+useEffect gives us that separation.
+
+So the real flow is:
+
+Component renders
+→ React updates UI
+→ useEffect runs
+→ setUsers updates state
+→ Component re-renders safely
 
 
 
@@ -129,18 +146,22 @@ With dependencies [a, b]
 → Runs after first render
 → Runs again whenever a or b changes
 
-Mental model:
 React checks whether dependency values changed.
 If changed → run effect
 If not changed → skip effect
 
 Important rule:
-Every external value used inside useEffect
-should be listed in dependency array.
+Every external value used inside useEffect should be listed in dependency array.
 
 Reason:
+Because useEffect captures values from the render where it was created.
+This behavior is called Closure.
+
 useEffect captures values using closure.
 Missing dependencies can cause stale state bugs.
+
+Stale Closure Problem:
+If dependency is missing, you may get stale (old) values.
 
 
 
@@ -148,8 +169,16 @@ Missing dependencies can cause stale state bugs.
 WHY "key" IS REQUIRED IN LIST RENDERING
 ====================================================================
 
-When rendering lists, React must identify
-which items changed between renders.
+users.map(user => (
+  <img key={user.login} />
+))
+
+When rendering lists, React must identify which items changed between renders.
+
+This helps React:
+✔ Compare old list vs new list
+✔ Update only changed elements
+✔ Avoid unnecessary DOM updates
 
 This process is called:
 Reconciliation (Virtual DOM diffing)
@@ -184,8 +213,8 @@ not to useEffect.
 STRICT MODE BEHAVIOR (React 18+)
 ====================================================================
 
-In development mode,
-useEffect may run twice.
+In development mode, useEffect may run twice.
+This happens because of: <React.StrictMode>
 
 Why?
 
@@ -200,4 +229,22 @@ This helps detect:
 Important:
 ✔ Happens only in development
 ✔ Does NOT happen in production
+
+
+
+====================================================================
+FINAL EXECUTION FLOW
+====================================================================
+
+1. Component renders
+2. useEffect runs (because [])
+3. API fetches data
+4. setUsers updates state
+5. Component re-renders
+6. users.map() displays images
+7. key helps React update efficiently
+
+Rendering stays pure.
+Side effects stay controlled.
+Application stays predictable.
 */
