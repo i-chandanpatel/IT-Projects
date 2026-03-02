@@ -120,50 +120,9 @@ into useEffect and solve the problem properly.
 
 
 
-====================================================================
-2️⃣ HOW useEffect WORKS
-
-useEffect(() => {
-   // side effect code
-}, [dependencies]);
-
-What is a "side effect"?
-Anything that:
-✔ Fetches data
-✔ Uses setTimeout / setInterval
-✔ Accesses DOM
-✔ Subscribes to external services
 
 
-HOW useEffect WORKS INTERNALLY:
-1. Component renders
-2. React paints UI to screen
-3. After render completes → useEffect runs
 
-Important:
-useEffect runs AFTER rendering, not during rendering.
-This prevents infinite loops and keeps rendering pure.
-
-
-====================================================================
-3️⃣ WHY WE PASS EMPTY ARRAY [] ?
-
-Example:
-useEffect(() => {
-   GitHubProfile();
-}, []);
-
-[] is called "Dependency Array"
-
-WHAT DOES [] MEAN?
-✔ Run only ONCE
-✔ Run after first render
-✔ Similar to componentDidMount (class components)
-
-Different Cases:
-1️⃣ No dependency array: Runs after EVERY render.
-2️⃣ With empty array []: Runs only once after initial render.
-3️⃣ With dependencies[a,b]: Runs on first render and whenever dependencies change
 
 USE CASE FOR []:
 ✔ API calls (fetch data once)
@@ -173,15 +132,7 @@ USE CASE FOR []:
 In our GitHub example: We fetch users only once when page loads.
 
 
-====================================================================
-DEPENDENCY ARRAY MENTAL MODEL (VERY IMPORTANT)
 
-The dependency array controls WHEN useEffect runs.
-
-React checks: "Did any dependency value change?"
-
-If YES → run effect again
-If NO → skip effect
 
 IMPORTANT RULE: Every value used inside useEffect should be listed in dependency array.
 
@@ -201,35 +152,22 @@ If dependency is missing, you may get stale values (old state).
 ====================================================================
 4️⃣ WHY "key" IS REQUIRED IN <img> TAG?
 
-users.map(user => (
-  <img key={user.login} ... />
-))
-
 When rendering lists, React needs to:
 ✔ Identify each element uniquely
 ✔ Track changes efficiently
 ✔ Update only changed items
 ✔ Avoid re-rendering everything
 
-React uses key to compare: Previous list  VS  New list
-This process is called: Reconciliation (Virtual DOM diffing)
 
 
 WHAT HAPPENS WITHOUT key?
 React shows warning: "Each child in a list should have a unique key prop."
-Performance issues, Wrong DOM updates, UI bugs
 
 BEST PRACTICE:
 ✔ Use unique id from data (user.id)
 ✔ Avoid using index if possible
 ✔ Key must be stable and unique
 
-Example:
-key={user.id}  ✅ Best
-key={user.login} ✅ Good if unique
-key={index} ❌ Avoid if list changes
-
-key is NOT related to useEffect
 
 FINAL UNDERSTANDING
 
