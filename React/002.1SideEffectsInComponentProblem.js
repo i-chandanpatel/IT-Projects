@@ -124,67 +124,10 @@ into useEffect and solve the problem properly.
 
 
 
-USE CASE FOR []:
-✔ API calls (fetch data once)
-✔ Initial setup
-✔ Loading initial data
-
-In our GitHub example: We fetch users only once when page loads.
 
 
 
 
-IMPORTANT RULE: Every value used inside useEffect should be listed in dependency array.
-
-useEffect(() => {
-  console.log(count);
-}, [count]);  // count must be included
-
-WHY?
-Because useEffect "captures" values from the render in which it was created.
-
-This is called:
-👉 Closure
-
-If dependency is missing, you may get stale values (old state).
-
-
-====================================================================
-4️⃣ WHY "key" IS REQUIRED IN <img> TAG?
-
-When rendering lists, React needs to:
-✔ Identify each element uniquely
-✔ Track changes efficiently
-✔ Update only changed items
-✔ Avoid re-rendering everything
-
-
-
-WHAT HAPPENS WITHOUT key?
-React shows warning: "Each child in a list should have a unique key prop."
-
-BEST PRACTICE:
-✔ Use unique id from data (user.id)
-✔ Avoid using index if possible
-✔ Key must be stable and unique
-
-
-FINAL UNDERSTANDING
-
-Your flow now works like this:
-1. Component renders
-2. useEffect runs once (because [])
-3. API call fetches data
-4. setUsers updates state
-5. Component re-renders with users
-6. users.map() displays images
-7. key helps React efficiently update DOM
-
-HOW REACT USES "key" INTERNALLY (RECONCILIATION)
-
-When state updates, React compares:
-Old Virtual DOM VS New Virtual DOM
-This comparison process is called Reconciliation
 
 Example:
 Old list: [ A, B, C ]
