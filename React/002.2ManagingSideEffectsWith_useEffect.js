@@ -137,11 +137,13 @@ Empty array [] means:
 ✔ After first render
 ✔ Similar to componentDidMount
 
+USE CASE FOR []:
+✔ API calls (fetch data once)
+✔ Initial setup
+✔ Loading initial data
+
 Other cases:
-
-No dependency array
-→ Runs after every render
-
+No dependency array → Runs after every render
 With dependencies [a, b]
 → Runs after first render
 → Runs again whenever a or b changes
@@ -149,6 +151,7 @@ With dependencies [a, b]
 React checks whether dependency values changed.
 If changed → run effect
 If not changed → skip effect
+
 
 Important rule:
 Every external value used inside useEffect should be listed in dependency array.
@@ -207,6 +210,36 @@ Note:
 key is related to list rendering,
 not to useEffect.
 
+When state updates, React compares:
+Old Virtual DOM VS New Virtual DOM
+This comparison process is called Reconciliation
+
+Example:
+Old list: [ A, B, C ]
+New list: [ A, C ]
+
+Without keys:
+React might think B changed to C (wrong assumption)
+
+With keys react knows
+✔ A is same
+✔ B is removed
+✔ C is same
+So React updates ONLY what changed.
+
+Without stable keys:
+1. Wrong items may update
+2. Input fields may lose focus
+3. UI bugs may appear
+
+(IMPORTANT) Keys must be:
+Unique, Stable and Predictable
+
+Best choice:
+key={user.id}
+
+Avoid:
+key={index} (if list order can change)
 
 
 ====================================================================
