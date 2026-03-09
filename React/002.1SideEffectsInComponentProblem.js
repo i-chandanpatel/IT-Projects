@@ -129,32 +129,6 @@ into useEffect and solve the problem properly.
 
 
 
-Example:
-Old list: [ A, B, C ]
-New list: [ A, C ]
-
-Without keys:
-React might think B changed to C (wrong assumption)
-
-With keys react knows
-✔ A is same
-✔ B is removed
-✔ C is same
-So React updates ONLY what changed.
-
-Without stable keys:
-1. Wrong items may update
-2. Input fields may lose focus
-3. UI bugs may appear
-
-(IMPORTANT) Keys must be:
-Unique, Stable and Predictable
-
-Best choice:
-key={user.id}
-
-Avoid:
-key={index} (if list order can change)
 
 
 ====================================================================
