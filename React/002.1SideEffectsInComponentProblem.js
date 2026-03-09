@@ -193,60 +193,8 @@ useEffect(() => {
 
 
 
-/*
-====================================================================
-6️⃣ CLEANUP FUNCTION INSIDE useEffect
-====================================================================
-
-useEffect can return a function.
-
-Example:
-useEffect(() => {
-  const interval = setInterval(() => {
-    console.log("Running...");
-  }, 1000);
-  
-  return () => {
-    clearInterval(interval);
-  };
-}, []);
 
 
-WHAT IS THIS RETURN FUNCTION?
-It is called Cleanup Function
-
-WHEN DOES CLEANUP RUN?
-✔ Before component unmounts
-✔ Before effect runs again (if dependencies change)
-
-WHY IS CLEANUP IMPORTANT?
-
-To prevent:
-❌ Memory leaks
-❌ Duplicate timers
-❌ Multiple subscriptions
-❌ Unexpected behavior
-
-
-REAL EXAMPLES WHERE CLEANUP IS REQUIRED:
-
-✔ setInterval / setTimeout
-✔ Event listeners
-✔ WebSocket connections
-✔ Subscriptions
-
-RULE: If your effect creates something, cleanup should remove it.
-
-====================================================================
-*/
-
-
-
-
-
-/*
-====================================================================
-9️⃣ 
 
 
 /*
