@@ -3,7 +3,8 @@ import { useState, useCallback } from "react";
 /*
 ========================================================
 MAIN IDEA OF useCallback
-========================================================
+
+IMPORTANT CONCEPT:
 
 In JavaScript, every time a component renders,
 any function defined inside it is recreated.
@@ -12,16 +13,34 @@ Example:
 
 function handleClick(){}
 
-This function is created again on every render.
+Every render creates a NEW function in memory.
 
-useCallback stores the function reference and
-returns the SAME function unless dependencies change.
+Why this can be a problem:
+- Passing functions to child components
+- Preventing unnecessary re-renders
+- Maintaining stable function references
+
+useCallback solves this.
+
+useCallback returns a MEMOIZED function.
+React will reuse the SAME function reference
+until the dependencies change.
+
+Syntax:
+
+const memoizedFunction = useCallback(fn, dependencies)
+
 ========================================================
 */
 
 export default function App() {
 
-  console.log("🔴 App component rendered");
+  console.log("App component rendered");
+  /*
+  This log helps you see when React re-renders the component.
+
+  Try clicking any button and watch the console.
+  */
 
   const [count, setCount] = useState(0);
   const [other, setOther] = useState(0);
@@ -33,22 +52,38 @@ export default function App() {
   PROBLEM EXAMPLE — EMPTY DEPENDENCY ARRAY
   ========================================================
 
-  This callback uses "count" but the dependency array is [].
+  This callback uses "count" BUT the dependency array is [].
 
-  That means React creates the function only once.
+  That means:
+  - React creates this function ONLY once
+  - The function remembers the value of count
+    from the FIRST render.
 
-  The function captures count from the FIRST render.
+  This creates something called a "STALE CLOSURE".
 
-  This creates a STALE CLOSURE.
+  Meaning:
+  The function holds an OLD value of count forever.
+
+  Steps to test:
+
+  1️⃣ Click "Increment Count" several times
+      count becomes 1, 2, 3, etc.
+
+  2️⃣ Click "Alert count (stale)"
+
+  Result:
+  It will still show the ORIGINAL value (0).
+
+  Because the function never updated.
   */
 
   const handleWithEmptyDeps = useCallback(() => {
 
-    console.log("🟡 handleWithEmptyDeps executed");
+    console.log("handleWithEmptyDeps executed");
 
     alert("Count seen by this function: " + count);
 
-  }, []); // ← created once only
+  }, []); // ← function created only once during first render
 
 
 
@@ -57,17 +92,30 @@ export default function App() {
   CORRECT EXAMPLE — COUNT IN DEPENDENCY ARRAY
   ========================================================
 
-  Now count is included in dependencies.
+  Now "count" is included in the dependency array.
 
-  React recreates the function whenever
-  count changes.
+  This means:
+  Whenever count changes → React creates a NEW function.
 
-  The function now always sees the latest count.
+  That function now captures the LATEST value of count.
+
+  Steps to test:
+
+  1️⃣ Click "Increment Count" a few times
+      count becomes 1,2,3...
+
+  2️⃣ Click "Alert count (correct)"
+
+  Result:
+  It shows the latest count.
+
+  Because React recreated the function
+  when count changed.
   */
 
   const handleWithCorrectDeps = useCallback(() => {
 
-    console.log("🟢 handleWithCorrectDeps executed");
+    console.log("handleWithCorrectDeps executed");
 
     alert("Count seen by this function: " + count);
 
@@ -79,6 +127,11 @@ export default function App() {
   ========================================================
   COMPONENT UI
   ========================================================
+
+  Buttons below trigger different state changes.
+
+  React re-renders the component whenever
+  ANY state changes.
   */
 
   return (
@@ -89,12 +142,39 @@ export default function App() {
       <p>Count state: {count}</p>
       <p>Other state: {other}</p>
 
-      {/* Change count */}
+
+      {/* ------------------------------------------------
+         BUTTON 1 — CHANGE COUNT
+      ------------------------------------------------
+
+      This updates the "count" state.
+
+      Result:
+      - App component re-renders
+      - handleWithCorrectDeps is recreated
+      - handleWithEmptyDeps stays the same
+      */}
+
       <button onClick={() => setCount(c => c + 1)}>
         Increment Count
       </button>
 
-      {/* Trigger re-render without touching count */}
+
+      {/* ------------------------------------------------
+         BUTTON 2 — CHANGE OTHER STATE
+      ------------------------------------------------
+
+      This changes "other".
+
+      Important:
+      count DOES NOT change.
+
+      Result:
+      - App component re-renders
+      - handleWithCorrectDeps stays the same
+      - handleWithEmptyDeps stays the same
+      */}
+
       <button
         onClick={() => setOther(o => o + 1)}
         style={{ marginLeft: 10 }}
@@ -108,7 +188,16 @@ export default function App() {
 
       {/* -----------------------------------------
          Stale closure example
-      ----------------------------------------- */}
+      -----------------------------------------
+
+      This demonstrates what happens when
+      dependencies are incorrect.
+
+      Because the dependency array is empty,
+      the function never updates.
+
+      It always remembers count from the FIRST render.
+      */}
 
       <h3>Stale closure example</h3>
 
@@ -128,7 +217,15 @@ export default function App() {
 
       {/* -----------------------------------------
          Correct dependency example
-      ----------------------------------------- */}
+      -----------------------------------------
+
+      This demonstrates the correct way.
+
+      Because count is in the dependency array,
+      the function updates whenever count changes.
+
+      It always has the latest value.
+      */}
 
       <h3>Correct dependency example</h3>
 
