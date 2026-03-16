@@ -1,16 +1,12 @@
 /*
 ===========================================================
 DEMONSTRATION: UNNECESSARY RENDERING WITHOUT React.memo
-===========================================================
 
 Key Idea:
 When a parent component re-renders,
 ALL child components re-render.
 
-Even if the child component props
-did NOT change.
-
-In this file we will show that problem.
+Even if the child component props did NOT change.
 
 Structure:
 ParentComponent
@@ -21,13 +17,11 @@ IncrementComponent changes state.
 RandomCalculationComponent does heavy work.
 
 But notice something strange:
-Whenever IncrementComponent updates state,
-RandomCalculationComponent will also render.
+Whenever IncrementComponent updates state, RandomCalculationComponent will also render.
 
 WHY?
 
-Because React re-renders the parent component.
-And when parent renders, all children render again.
+Because React re-renders the parent component. And when parent renders, all children render again.
 ===========================================================
 */
 
@@ -37,25 +31,17 @@ import { useState } from "react";
 /*
 ===========================================================
 Increment Component
-===========================================================
 
 This component manages its own state.
 
-When button is clicked:
-count increases
-component re-renders
+When button clicked: count increases and component re-renders
 
-BUT because the parent also re-renders,
-the RandomCalculationComponent also renders.
-
+BUT because the parent also re-renders, the RandomCalculationComponent also renders.
 Even though it does NOT depend on count.
-
-We will observe this using console.log.
 ===========================================================
 */
 
 function IncrementComponent() {
-
   const [count, setCount] = useState(0);
 
   console.log("IncrementComponent Rendered");
@@ -77,8 +63,6 @@ function IncrementComponent() {
 /*
 ===========================================================
 Random Calculation Component
-===========================================================
-
 This component performs a heavy calculation.
 
 Important:
@@ -87,12 +71,9 @@ It receives a STATIC prop.
 Meaning:
 The prop NEVER changes.
 
-But even then this component will re-render
-whenever the parent re-renders.
+But even then this component will re-render whenever the parent re-renders.
 
-So each time you click increment,
-this heavy calculation runs again.
-
+So each time you click increment, this heavy calculation runs again.
 This is unnecessary work.
 ===========================================================
 */
@@ -121,40 +102,26 @@ function RandomCalculationComponent({value}) {
 /*
 ===========================================================
 Parent Component
-===========================================================
 
 Parent renders both components.
 
-Whenever IncrementComponent updates state,
-Parent re-renders.
-
-When Parent re-renders,
-ALL children render again.
-
-Observe the console:
-
-Click increment button.
+Whenever IncrementComponent updates state, Parent re-renders.
+When Parent re-renders, ALL children render again.
 
 Console output:
 IncrementComponent Rendered
 RandomCalculationComponent Rendered
 
-Even though the Random component
-does not depend on count.
+Even though the Random component does not depend on count.
 ===========================================================
 */
 
 export default function WithoutMemo(){
-
   console.log("Parent Component Rendered");
-
   return (
     <div>
       <h1>WITHOUT React.memo Example</h1>
-
       <IncrementComponent />
-
-      {/* static prop value */}
       <RandomCalculationComponent value={10}/>
     </div>
   );
