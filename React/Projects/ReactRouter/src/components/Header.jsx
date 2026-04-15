@@ -7,6 +7,12 @@ import { useLocation, useNavigate } from 'react-router-dom'     //Just alternati
 // useNavigate → navigate using function (used in buttons, logic)
 // useLocation → gives current URL (used to manually check active route)
 
+// Link → internal navigation (no reload)
+// NavLink → internal + active highlight
+// <a> → external websites (GitHub, Facebook, etc.)
+
+// 🔥 Rule: NavLink for menus, Link for simple navigation, useNavigate for logic-based navigation
+// 🔥 isActive (NavLink) = automatic | useLocation = manual active check
 export default function Header() {
 
     const navigate = useNavigate()
