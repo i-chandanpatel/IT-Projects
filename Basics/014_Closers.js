@@ -84,3 +84,64 @@ counter2 → count = 2
 
 Both closures have completely independent memory.
 */
+
+// --------------------------------------------------
+// Real World Example: Data Hiding using Closure
+// --------------------------------------------------
+
+function createBankAccount(initialBalance) {
+
+    let balance = initialBalance; // Private variable
+
+    return {
+
+        deposit(amount) {
+            balance += amount;
+        },
+
+        withdraw(amount) {
+
+            if (amount <= balance)
+                balance -= amount;
+            else
+                console.log("Insufficient Balance");
+        },
+
+        getBalance() {
+            return balance;
+        }
+
+    };
+}
+
+
+const account = createBankAccount(1000);
+
+account.deposit(500);
+account.withdraw(300);
+
+console.log(account.getBalance()); // 1200
+
+// balance is private
+console.log(account.balance); // undefined
+
+
+/*
+Explanation
+
+The variable 'balance' belongs to createBankAccount().
+
+Normally, it should disappear after the function finishes.
+
+However, deposit(), withdraw() and getBalance()
+still need 'balance'.
+
+So JavaScript keeps 'balance' alive.
+
+Only these methods can access or modify it.
+
+Outside code cannot directly access 'balance'.
+
+This is called Data Hiding (Encapsulation),
+one of the biggest real-world uses of closures.
+*/
