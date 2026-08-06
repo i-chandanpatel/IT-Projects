@@ -145,3 +145,28 @@ Outside code cannot directly access 'balance'.
 This is called Data Hiding (Encapsulation),
 one of the biggest real-world uses of closures.
 */
+
+/*
+Advantages of Closures
+
+1. Data Hiding / Private Variables
+2. Maintains state between function calls
+3. Function Factory
+4. Event Listeners
+5. Callbacks
+6. setTimeout() and setInterval()
+7. Module Pattern
+
+
+Disadvantages of Closures
+
+1. Uses extra memory because captured variables
+   remain alive.
+
+2. Unused closures may lead to memory leaks.
+
+3. Can be harder to debug due to preserved state.
+
+4. Creating thousands of unnecessary closures
+   may slightly affect performance.
+*/
